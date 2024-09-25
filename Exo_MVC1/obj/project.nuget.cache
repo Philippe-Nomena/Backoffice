@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0KPXCjrPLWQ=",
+  "dgSpecHash": "7Hdyl5ItnDk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\Exo_MVC1.csproj",
+  "projectFilePath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\philippe\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

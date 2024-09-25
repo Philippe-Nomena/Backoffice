@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\Exo_MVC1.csproj": {}
+    "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\Exo_MVC1.csproj": {
+    "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\Exo_MVC1.csproj",
+        "projectUniqueName": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj",
         "projectName": "Exo_MVC1",
-        "projectPath": "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\Exo_MVC1.csproj",
+        "projectPath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj",
         "packagesPath": "C:\\Users\\philippe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\philippe\\source\\repos\\Exo_MVC1\\Exo_MVC1\\obj\\",
+        "outputPath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages"

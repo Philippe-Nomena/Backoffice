@@ -77,7 +77,7 @@ namespace Exo_MVC1.Controllers
                     {
                         // Set session data
                         HttpContext.Session.SetString("AdminId", admin.Id.ToString());
-                        HttpContext.Session.SetString("AdminName", admin.UserName); // Assuming username is stored
+                        HttpContext.Session.SetString("AdminName", admin.UserName); 
 
                         return RedirectToLocal(returnUrl);
                     }
@@ -93,7 +93,8 @@ namespace Exo_MVC1.Controllers
 
             if (admin != null && BCrypt.Net.BCrypt.Verify(model.Motdepasse, admin.Motdepasse))
             {
-                HttpContext.Session.SetString("id", admin.Id.ToString());
+                HttpContext.Session.SetString("AdminId", admin.Id.ToString());
+               
                 return RedirectToAction("Index", "Home");
             }
             else

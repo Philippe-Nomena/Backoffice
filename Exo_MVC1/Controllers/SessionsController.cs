@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Exo_MVC1.Controllers
 {
@@ -20,23 +18,37 @@ namespace Exo_MVC1.Controllers
             _context = context;
         }
 
+        // Session verification method
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
+
         // GET: Sessions
-  
         public async Task<IActionResult> Index()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             return View(await _context.Sessions.ToListAsync());
         }
 
         // GET: Sessions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var session = await _context.Sessions
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var session = await _context.Sessions.FirstOrDefaultAsync(m => m.Id == id);
             if (session == null)
             {
                 return NotFound();
@@ -46,22 +58,26 @@ namespace Exo_MVC1.Controllers
         }
 
         // GET: Sessions/Create
-
-
         public IActionResult Create()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             return PartialView("Create");
         }
 
         // POST: Sessions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-     
         [HttpPost]
         [ValidateAntiForgeryToken]
-     
         public async Task<IActionResult> Create([Bind("Id,Nom")] Session session)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(session);
@@ -74,6 +90,11 @@ namespace Exo_MVC1.Controllers
         // GET: Sessions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -88,12 +109,15 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Sessions/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nom")] Session session)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             if (id != session.Id)
             {
                 return NotFound();
@@ -125,13 +149,17 @@ namespace Exo_MVC1.Controllers
         // GET: Sessions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var session = await _context.Sessions
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var session = await _context.Sessions.FirstOrDefaultAsync(m => m.Id == id);
             if (session == null)
             {
                 return NotFound();
@@ -145,6 +173,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Redirect to Admin login
+            }
+
             var session = await _context.Sessions.FindAsync(id);
             if (session != null)
             {
