@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
+using Microsoft.AspNetCore.Http; // For session handling
 
 namespace Exo_MVC1.Controllers
 {
@@ -19,9 +20,20 @@ namespace Exo_MVC1.Controllers
             _context = context;
         }
 
+        // Private method to check if Admin is logged in
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
+
         // GET: Pratiquants
         public async Task<IActionResult> Index()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); 
+            }
+
             var pratiquants = await _context.Pratiquants
                 .Include(p => p.Ativite)
                 .Include(p => p.Categorie)
@@ -29,26 +41,46 @@ namespace Exo_MVC1.Controllers
                 .ToListAsync();
 
             var categoriesForActivite = await _context.Categories.ToListAsync();
-
             ViewData["CategoriesForActivite"] = categoriesForActivite;
 
             return View(pratiquants);
         }
 
-        public JsonResult GetCategories(int activiteId)
+        // GET: Pratiquants/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var categories = _context.Categories
-                .Where(c => c.Id_activite == activiteId)
-                .ToList();
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
 
-            return Json(categories.Select(c => new { Id = c.Id, Name = c.Categories }));
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pratiquant = await _context.Pratiquants
+                .Include(p => p.Ativite)
+                .Include(p => p.Categorie)
+                .Include(p => p.Session)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (pratiquant == null)
+            {
+                return NotFound();
+            }
+
+            return View(pratiquant);
         }
-
-        // Other methods (Details, Create, Edit, Delete) remain unchanged
 
         // GET: Pratiquants/Create
         public IActionResult Create()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             ViewBag.Activites = new SelectList(_context.Activites, "Id", "Nom");
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Categories");
             ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom");
@@ -59,20 +91,22 @@ namespace Exo_MVC1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
-   
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(pratiquant);
                 await _context.SaveChangesAsync();
 
-              
                 var categorie = await _context.Categories
                     .FirstOrDefaultAsync(c => c.Id == pratiquant.Id_categorie);
 
                 if (categorie != null)
                 {
-                 
                     var currentDate = categorie.Datedebut;
                     while (currentDate <= categorie.Datefin)
                     {
@@ -80,16 +114,15 @@ namespace Exo_MVC1.Controllers
                         {
                             Id_pratiquant = pratiquant.Id,
                             Jour = currentDate.ToString(),
-                            Present = false, 
+                            Present = false,
                             Abscence = true,
-                            Id_activite=pratiquant.Id_activite,
-                            Id_categorie=pratiquant.Id_categorie,
-                            Id_session=pratiquant.Id_session,
-                           
+                            Id_activite = pratiquant.Id_activite,
+                            Id_categorie = pratiquant.Id_categorie,
+                            Id_session = pratiquant.Id_session,
                         };
 
                         _context.Presences.Add(presence);
-                        currentDate = currentDate.AddDays(1);  
+                        currentDate = currentDate.AddDays(1);
                     }
                     await _context.SaveChangesAsync();
                 }
@@ -106,6 +139,11 @@ namespace Exo_MVC1.Controllers
         // GET: Pratiquants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -116,9 +154,11 @@ namespace Exo_MVC1.Controllers
             {
                 return NotFound();
             }
+
             ViewBag.Id_activite = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
             ViewBag.Id_session = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
             ViewBag.Id_categorie = new SelectList(Enumerable.Empty<SelectListItem>());
+
             return View(pratiquant);
         }
 
@@ -127,6 +167,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             if (id != pratiquant.Id)
             {
                 return NotFound();
@@ -152,36 +197,21 @@ namespace Exo_MVC1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_activite"] = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
-            ViewData["Id_categorie"] = new SelectList(_context.Categories, "Id", "Categories", pratiquant.Id_categorie);
-            ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
-            return View(pratiquant);
-        }
-        // GET: Pratiquants/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var pratiquant = await _context.Pratiquants
-                .Include(p => p.Ativite)      
-                .Include(p => p.Categorie)    
-                .Include(p => p.Session)      
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (pratiquant == null)
-            {
-                return NotFound();
-            }
-
+            ViewBag.Id_activite = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
+            ViewBag.Id_session = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
+            ViewBag.Id_categorie = new SelectList(Enumerable.Empty<SelectListItem>());
             return View(pratiquant);
         }
 
         // GET: Pratiquants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -192,6 +222,7 @@ namespace Exo_MVC1.Controllers
                 .Include(p => p.Categorie)
                 .Include(p => p.Session)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (pratiquant == null)
             {
                 return NotFound();
@@ -205,6 +236,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var pratiquant = await _context.Pratiquants.FindAsync(id);
             if (pratiquant != null)
             {
@@ -218,6 +254,21 @@ namespace Exo_MVC1.Controllers
         private bool PratiquantExists(int id)
         {
             return _context.Pratiquants.Any(e => e.Id == id);
+        }
+
+        // For dynamic category fetching based on selected activite
+        public JsonResult GetCategories(int activiteId)
+        {
+            if (!IsAdminLoggedIn())
+            {
+                return Json(new { error = "Unauthorized" });
+            }
+
+            var categories = _context.Categories
+                .Where(c => c.Id_activite == activiteId)
+                .ToList();
+
+            return Json(categories.Select(c => new { Id = c.Id, Name = c.Categories }));
         }
     }
 }

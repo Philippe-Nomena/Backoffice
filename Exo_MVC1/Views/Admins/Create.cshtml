@@ -2,37 +2,61 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
 
 <h1>Create</h1>
 
 <h4>Admin</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" />
-                <span asp-validation-for="Nom" class="text-danger"></span>
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <div class="card px-sm-6 px-0">
+                <div class="card-body">
+                    <h4 class="mb-4">Register Admin</h4>
+                    <p class="mb-4">Please fill in the details to create your account.</p>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Nom" class="form-label">Full Name</label>
+                                    <input asp-for="Nom" class="form-control" placeholder="Enter your full name" />
+                                    <span asp-validation-for="Nom" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Username" class="form-label">Email or Username</label>
+                                    <input asp-for="Username" class="form-control" placeholder="Enter your email or username" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Motdepasse" class="form-label">Password</label>
+                                    <input asp-for="Motdepasse" class="form-control" placeholder="Enter your password" />
+                                    <span asp-validation-for="Motdepasse" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <button class="btn btn-primary d-grid w-100" type="submit">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <p class="text-center">
+                        <span>Already have an account?</span>
+                        <a href="/Admins/Login"><span>Login here</span></a>
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Motdepasse" class="control-label"></label>
-                <input asp-for="Motdepasse" class="form-control" />
-                <span asp-validation-for="Motdepasse" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

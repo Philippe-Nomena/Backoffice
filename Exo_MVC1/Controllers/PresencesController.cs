@@ -19,10 +19,17 @@ namespace Exo_MVC1.Controllers
         {
             _context = context;
         }
-
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
         // GET: Presences
         public async Task<IActionResult> Index()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var applicationDbContext = _context.Presences.Include(p => p.Ativite).Include(p => p.Categorie).Include(p => p.Pratiquant).Include(p => p.Session);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -30,6 +37,10 @@ namespace Exo_MVC1.Controllers
         // GET: Presences/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -52,6 +63,10 @@ namespace Exo_MVC1.Controllers
         // GET: Presences/Create
         public IActionResult Create()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             ViewData["Id_activite"] = new SelectList(_context.Activites, "Id", "Nom");
             ViewData["Id_categorie"] = new SelectList(_context.Categories, "Id", "Categories");
             ViewData["Id_pratiquant"] = new SelectList(_context.Pratiquants, "Id", "Nom");
@@ -66,6 +81,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Id_session,Id_activite,Id_categorie,Jour,Present,Abscence,Id_pratiquant")] Presence presence)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(presence);
@@ -82,6 +101,10 @@ namespace Exo_MVC1.Controllers
         // GET: Presences/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -106,6 +129,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Id_session,Id_activite,Id_categorie,Jour,Present,Abscence,Id_pratiquant")] Presence presence)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id != presence.Id)
             {
                 return NotFound();
@@ -141,6 +168,10 @@ namespace Exo_MVC1.Controllers
         // GET: Presences/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -162,7 +193,11 @@ namespace Exo_MVC1.Controllers
         // GET: Presence/ByActiviteAndCompagnie
         public async Task<IActionResult> ByActiviteAndCompagnie(int Id_compagnie)
         {
-           
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
+
             var compagnies = _context.Compagnyes.ToList();
             ViewBag.listCompanies= compagnies;
             var presences = await _context.Presences
@@ -182,6 +217,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var presence = await _context.Presences.FindAsync(id);
             if (presence != null)
             {

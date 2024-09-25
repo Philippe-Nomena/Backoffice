@@ -94,7 +94,9 @@ namespace Exo_MVC1.Controllers
             if (admin != null && BCrypt.Net.BCrypt.Verify(model.Motdepasse, admin.Motdepasse))
             {
                 HttpContext.Session.SetString("AdminId", admin.Id.ToString());
-               
+                HttpContext.Session.SetString("AdminName", admin.Username);
+
+
                 return RedirectToAction("Index", "Home");
             }
             else

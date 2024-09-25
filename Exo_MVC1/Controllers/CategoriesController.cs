@@ -18,10 +18,18 @@ namespace Exo_MVC1.Controllers
         {
             _context = context;
         }
-
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
         // GET: Categories
         public async Task<IActionResult> Index()
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var applicationDbContext = _context.Categories.Include(c => c.Ativite);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -29,6 +37,11 @@ namespace Exo_MVC1.Controllers
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -48,6 +61,11 @@ namespace Exo_MVC1.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             ViewData["Id_activite"] = new SelectList(_context.Activites, "Id", "Nom");
             return View();
         }
@@ -59,6 +77,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Categories,Horaire,Prix,Jour,Datedebut,Datefin,Id_activite")] Categorie categorie)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(categorie);
@@ -72,6 +95,11 @@ namespace Exo_MVC1.Controllers
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -93,6 +121,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Categories,Horaire,Prix,Jour,Datedebut,Datefin,Id_activite")] Categorie categorie)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id != categorie.Id)
             {
                 return NotFound();
@@ -125,6 +158,11 @@ namespace Exo_MVC1.Controllers
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -146,6 +184,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var categorie = await _context.Categories.FindAsync(id);
             if (categorie != null)
             {

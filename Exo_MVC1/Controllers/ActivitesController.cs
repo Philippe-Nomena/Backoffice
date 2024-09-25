@@ -18,10 +18,18 @@ namespace Exo_MVC1.Controllers
         {
             _context = context;
         }
-
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
         // GET: Activites
         public async Task<IActionResult> Index()
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var applicationDbContext = _context.Activites.Include(a => a.Compagny);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -29,6 +37,11 @@ namespace Exo_MVC1.Controllers
         // GET: Activites/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -48,6 +61,11 @@ namespace Exo_MVC1.Controllers
         // GET: Activites/Create
         public IActionResult Create()
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             ViewData["Id_compagnie"] = new SelectList(_context.Compagnyes, "Id", "Compagnie");
             return View();
         }
@@ -59,6 +77,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nom,ImagePath,Id_compagnie")] Activite activite)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(activite);
@@ -72,6 +95,11 @@ namespace Exo_MVC1.Controllers
         // GET: Activites/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -93,6 +121,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,ImagePath,Id_compagnie")] Activite activite)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id != activite.Id)
             {
                 return NotFound();
@@ -125,6 +158,11 @@ namespace Exo_MVC1.Controllers
         // GET: Activites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -146,6 +184,11 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var activite = await _context.Activites.FindAsync(id);
             if (activite != null)
             {

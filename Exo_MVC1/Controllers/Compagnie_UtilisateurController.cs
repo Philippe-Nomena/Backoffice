@@ -18,10 +18,17 @@ namespace Exo_MVC1.Controllers
         {
             _context = context;
         }
-
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
         // GET: Compagnie_Utilisateur
         public async Task<IActionResult> Index()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var applicationDbContext = _context.Compagnie_Utilisateurs.Include(c => c.Compagny).Include(c => c.Utilisateur);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -29,6 +36,10 @@ namespace Exo_MVC1.Controllers
         // GET: Compagnie_Utilisateur/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -49,6 +60,10 @@ namespace Exo_MVC1.Controllers
         // GET: Compagnie_Utilisateur/Create
         public IActionResult Create()
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             ViewData["Id_compagnie"] = new SelectList(_context.Compagnyes, "Id", "Compagnie");
             ViewData["Id_utilisateur"] = new SelectList(_context.Utilisateurs, "Id", "Nom");
             return View();
@@ -61,6 +76,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(compagnie_Utilisateur);
@@ -75,6 +94,10 @@ namespace Exo_MVC1.Controllers
         // GET: Compagnie_Utilisateur/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -97,6 +120,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id != compagnie_Utilisateur.Id)
             {
                 return NotFound();
@@ -130,6 +157,10 @@ namespace Exo_MVC1.Controllers
         // GET: Compagnie_Utilisateur/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -152,6 +183,10 @@ namespace Exo_MVC1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             var compagnie_Utilisateur = await _context.Compagnie_Utilisateurs.FindAsync(id);
             if (compagnie_Utilisateur != null)
             {

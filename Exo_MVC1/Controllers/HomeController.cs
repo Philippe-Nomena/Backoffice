@@ -23,7 +23,7 @@ namespace Exo_MVC1.Controllers
         public async Task<IActionResult> Index()
         {
           
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
                 return RedirectToAction("Login");
             }

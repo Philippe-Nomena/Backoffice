@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
@@ -19,9 +18,20 @@ namespace Exo_MVC1.Controllers
             _context = context;
         }
 
+        // Check if an admin session is active
+        private bool IsAdminLoggedIn()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
+        }
+
         // GET: Utilisateurs
         public async Task<IActionResult> Index()
         {
+            // Redirect to login if admin is not logged in
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins"); // Adjust the controller and action as needed
+            }
             return View(await _context.Utilisateurs.ToListAsync());
         }
 
@@ -46,12 +56,15 @@ namespace Exo_MVC1.Controllers
         // GET: Utilisateurs/Create
         public IActionResult Create()
         {
+            // Check if admin is logged in before showing the create view
+            if (!IsAdminLoggedIn())
+            {
+                return RedirectToAction("Login", "Admins");
+            }
             return View();
         }
 
         // POST: Utilisateurs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nom")] Utilisateur utilisateur)
@@ -82,8 +95,6 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Utilisateurs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nom")] Utilisateur utilisateur)
