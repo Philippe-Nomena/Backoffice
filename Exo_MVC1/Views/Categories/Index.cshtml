@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Exo_MVC1.Models.Categorie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Categories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horaire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datedebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datefin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativite)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datedebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datefin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativite.Nom)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

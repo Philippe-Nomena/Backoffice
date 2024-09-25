@@ -1,0 +1,139 @@
+﻿@model IEnumerable<Exo_MVC1.Models.Session>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vous etes sur la page session</h1>
+
+<p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        Ajouter
+    </button>
+</p>
+
+
+<div class="modal fade " id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Créer une session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="createModalBody">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Modifier une session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="editModalBody">
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Detail d' une session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detailModalBody">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="deleteModalBody">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nom)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nom)</td>
+                <td class="flex">
+                    <a href="javascript:void(0);" data-id="@item.Id" class="edit-link align-items-center bg-dark text-white" style="width: 100%; border-radius: 10px; border: 2px solid #343a40;">
+                        <i class="fa-solid fa-pen-to-square me-2"></i> Edit
+                    </a>
+                    |
+                    <a href="javascript:void(0);" data-id="@item.Id" class="detail-link"> <i class="fa-solid fa-circle-info"></i>Details</a> |
+                    <a href="javascript:void(0);" data-id="@item.Id" class="delete-link">  <i class="fa-solid fa-trash-alt"></i> Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+         
+            $('#createModal').on('show.bs.modal', function () {
+                var url = '@Url.Action("Create", "Sessions")';
+                $('#createModalBody').load(url);
+            });
+
+         
+            $('.edit-link').click(function () {
+                var sessionId = $(this).data('id');  
+                var url = '@Url.Action("Edit", "Sessions")/' + sessionId;
+         
+                $('#editModalBody').load(url, function () {
+                    $('#editModal').modal('show');  
+                });
+            });
+
+            $('.detail-link').click(function () {
+                var sessionId = $(this).data('id');
+                var url = '@Url.Action("Details", "Sessions")/' + sessionId;
+
+                $('#detailModalBody').load(url, function () {
+                    $('#detailModal').modal('show');
+                });
+            });
+
+            $('.delete-link').click(function () {
+                var sessionId = $(this).data('id');
+                var url = '@Url.Action("Delete", "Sessions")/' + sessionId;
+
+                $('#deleteModalBody').load(url, function () {
+                    $('#deleteModal').modal('show');
+                });
+            });
+        });
+    </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Exo_MVC1.Models.Presence>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Session)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categorie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Present)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abscence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pratiquant)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Session.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativite.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categorie.Categories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Present)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abscence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pratiquant.Nom)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Exo_MVC1.Models.Presence>
+
+<h2>Presences for Activite with Compagnie audojo</h2>
+<form action="/Presences/ByActiviteAndCompagnie" method="get">
+    <select id="Id_compagnie" name="Id_compagnie">
+        @foreach (var v in ViewBag.listCompanies as List<Compagny>)
+        {
+            <option value="@v.Id">@v.Compagnie</option>
+
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Filtrer</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pratiquant </th>
+            <th>Date</th>
+            <th>Status</th> 
+            <th>Activite Name</th>
+            <th>Compagnie</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var presence in Model)
+        {
+            <tr>
+                <td>@presence.Pratiquant?.Nom</td>
+                <td>@presence.Jour</td>
+                <td>
+                    @if (presence.Present)
+                    {
+                        <span>Present</span>
+                    }
+                    else
+                    {
+                        <span>Absent</span>
+                    }
+                </td>
+                <td>@presence.Ativite.Nom</td>
+                <td>@presence.Ativite.Compagny?.Compagnie</td>
+            </tr>
+        }
+    </tbody>
+</table>

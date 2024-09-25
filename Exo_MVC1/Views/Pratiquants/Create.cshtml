@@ -1,0 +1,167 @@
+﻿@* create.cshtml views *@
+
+
+@model Exo_MVC1.Models.Pratiquant
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pratiquant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id_session" class="control-label"></label>
+                <select asp-for="Id_session" class ="form-control" asp-items="ViewBag.Id_session"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sexe" class="control-label"></label>
+                <input asp-for="Sexe" class="form-control" />
+                <span asp-validation-for="Sexe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naissance" class="control-label"></label>
+                <input asp-for="Naissance" class="form-control" />
+                <span asp-validation-for="Naissance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Payement" class="control-label"></label>
+                <input asp-for="Payement" class="form-control" />
+                <span asp-validation-for="Payement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consigne" class="control-label"></label>
+                <input asp-for="Consigne" class="form-control" />
+                <span asp-validation-for="Consigne" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Carte_fede" class="control-label"></label>
+                <input asp-for="Carte_fede" class="form-control" />
+                <span asp-validation-for="Carte_fede" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Etiquete" class="control-label"></label>
+                <input asp-for="Etiquete" class="form-control" />
+                <span asp-validation-for="Etiquete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courriel" class="control-label"></label>
+                <input asp-for="Courriel" class="form-control" />
+                <span asp-validation-for="Courriel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adresse" class="control-label"></label>
+                <input asp-for="Adresse" class="form-control" />
+                <span asp-validation-for="Adresse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telephone" class="control-label"></label>
+                <input asp-for="Telephone" class="form-control" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tel_urgence" class="control-label"></label>
+                <input asp-for="Tel_urgence" class="form-control" />
+                <span asp-validation-for="Tel_urgence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_activite" class="control-label"></label>
+
+                @if (ViewBag.Activites != null)
+                {
+                    <select asp-for="Id_activite" class="form-control" id="activiteDropdown">
+                        <option value="">Select Activite</option>
+                        @foreach (var activite in ViewBag.Activites as IEnumerable<SelectListItem>)
+                        {
+                            <option value="@activite.Value">@activite.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <p>Pas d'activite</p>
+                }
+            </div>
+          
+
+
+            <div class="form-group">
+                <label asp-for="Id_categorie" class="control-label"></label>
+                <select asp-for="Id_categorie" class="form-control" id="categorieDropdown">
+                    <option value="">Select Categorie</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Evaluation" class="control-label"></label>
+                <input asp-for="Evaluation" class="form-control" />
+                <span asp-validation-for="Evaluation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mode_payement" class="control-label"></label>
+                <input asp-for="Mode_payement" class="form-control" />
+                <span asp-validation-for="Mode_payement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Carte_payement" class="control-label"></label>
+                <input asp-for="Carte_payement" class="form-control" />
+                <span asp-validation-for="Carte_payement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Groupe" class="control-label"></label>
+                <input asp-for="Groupe" class="form-control" />
+                <span asp-validation-for="Groupe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#activiteDropdown').change(function () {
+                var activiteId = $(this).val();
+                if (activiteId) {
+                    $.ajax({
+                        url: '@Url.Action("GetCategories")',
+                        type: 'GET',
+                        data: { activiteId: activiteId },
+                        success: function (data) {
+                            var $categorieDropdown = $('#categorieDropdown');
+                            $categorieDropdown.empty();
+                            $categorieDropdown.append('<option value="">Select Categorie</option>');
+                            $.each(data, function (index, category) {
+                                $categorieDropdown.append('<option value="' + category.id + '">' + category.name + '</option>');
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                } else {
+                    $('#categorieDropdown').empty().append('<option value="">Select Categorie</option>');
+                }
+            });
+        });
+
+    </script>
+}

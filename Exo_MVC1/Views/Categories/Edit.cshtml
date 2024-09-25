@@ -1,0 +1,64 @@
+﻿@model Exo_MVC1.Models.Categorie
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Categorie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Categories" class="control-label"></label>
+                <input asp-for="Categories" class="form-control" />
+                <span asp-validation-for="Categories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Horaire" class="control-label"></label>
+                <input asp-for="Horaire" class="form-control" />
+                <span asp-validation-for="Horaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prix" class="control-label"></label>
+                <input asp-for="Prix" class="form-control" />
+                <span asp-validation-for="Prix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jour" class="control-label"></label>
+                <input asp-for="Jour" class="form-control" />
+                <span asp-validation-for="Jour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datedebut" class="control-label"></label>
+                <input asp-for="Datedebut" class="form-control" />
+                <span asp-validation-for="Datedebut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datefin" class="control-label"></label>
+                <input asp-for="Datefin" class="form-control" />
+                <span asp-validation-for="Datefin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_activite" class="control-label"></label>
+                <select asp-for="Id_activite" class="form-control" asp-items="ViewBag.Id_activite"></select>
+                <span asp-validation-for="Id_activite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
