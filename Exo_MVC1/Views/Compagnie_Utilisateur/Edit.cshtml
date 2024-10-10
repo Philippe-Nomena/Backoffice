@@ -2,47 +2,41 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
-<h1>Edit</h1>
 
-<h4>Compagnie_Utilisateur</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" class="form-control bg-white" required  />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Motdepasse" class="control-label"></label>
-                <input asp-for="Motdepasse" class="form-control" />
+                <input asp-for="Motdepasse" class="form-control bg-white" required  />
                 <span asp-validation-for="Motdepasse" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_utilisateur" class="control-label"></label>
-                <select asp-for="Id_utilisateur" class="form-control" asp-items="ViewBag.Id_utilisateur"></select>
+                <select asp-for="Id_utilisateur" class="form-control bg-white" required  asp-items="ViewBag.Id_utilisateur"></select>
                 <span asp-validation-for="Id_utilisateur" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_compagnie" class="control-label"></label>
-                <select asp-for="Id_compagnie" class="form-control" asp-items="ViewBag.Id_compagnie"></select>
+                <select asp-for="Id_compagnie" class="form-control bg-white mb-3" required  asp-items="ViewBag.Id_compagnie"></select>
                 <span asp-validation-for="Id_compagnie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

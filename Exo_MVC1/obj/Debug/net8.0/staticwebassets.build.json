@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "i6eVgGV2OHhb2MfdCrkXc8d72R8QteHfPrsHqkEo9zM=",
+  "Hash": "uT328Bv2L4ItP2MHdcRj5EB+tzKG6aq9e57E1NFB99w=",
   "Source": "Exo_MVC1",
   "BasePath": "_content/Exo_MVC1",
   "Mode": "Default",
@@ -1195,6 +1195,25 @@
       "OriginalItemSpec": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Exo_MVC1.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\bootstrap.min.css",
+      "SourceId": "Exo_MVC1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
+      "BasePath": "_content/Exo_MVC1",
+      "RelativePath": "css/bootstrap.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
+    },
+    {
       "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\site.css",
       "SourceId": "Exo_MVC1",
       "SourceType": "Discovered",
@@ -1214,6 +1233,25 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\style.css",
+      "SourceId": "Exo_MVC1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
+      "BasePath": "_content/Exo_MVC1",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
       "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\favicon.ico",
       "SourceId": "Exo_MVC1",
       "SourceType": "Discovered",
@@ -1231,6 +1269,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\js\\main.js",
+      "SourceId": "Exo_MVC1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
+      "BasePath": "_content/Exo_MVC1",
+      "RelativePath": "js/main.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\main.js"
     },
     {
       "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\js\\site.js",

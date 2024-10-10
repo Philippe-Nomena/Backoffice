@@ -2,14 +2,11 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
-<h1>Edit</h1>
 
-<h4>Presence</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -30,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Jour" class="control-label"></label>
-                <input asp-for="Jour" class="form-control" />
+                <input asp-for="Jour" class="form-control bg-white" />
                 <span asp-validation-for="Jour" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -45,20 +42,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Id_pratiquant" class="control-label"></label>
-                <select asp-for="Id_pratiquant" class="form-control" asp-items="ViewBag.Id_pratiquant"></select>
+                <select asp-for="Id_pratiquant" class="form-control mb-3" asp-items="ViewBag.Id_pratiquant"></select>
                 <span asp-validation-for="Id_pratiquant" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+ *@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -23,5 +23,7 @@ namespace Exo_MVC1.Data
         public DbSet<Compagny> Compagnyes { get; set; } = null!;
 
         public DbSet<Compagnie_Utilisateur> Compagnie_Utilisateurs { get; set; } = null!;
+
+        public DbSet<UploadExcel> UploadExcels { get; set; } = null!;
     }
 }

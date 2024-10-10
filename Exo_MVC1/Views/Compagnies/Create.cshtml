@@ -2,31 +2,25 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
 
-<h1>Create</h1>
 
-<h4>Compagny</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Compagnie" class="control-label"></label>
-                <input asp-for="Compagnie" class="form-control" />
+                <label asp-for="Compagnie" class="control-label text-black"></label>
+                <input asp-for="Compagnie" class="form-control rounded-left bg-white mb-3" required/>
                 <span asp-validation-for="Compagnie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Create" class=" btn btn-success rounded submit px-3" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
 using Microsoft.AspNetCore.Authorization;
+using OfficeOpenXml;
 
 namespace Exo_MVC1.Controllers
 {
@@ -28,10 +29,14 @@ namespace Exo_MVC1.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!IsAdminLoggedIn())
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
-                return RedirectToAction("Login", "Admins");
+                return RedirectToAction("Login");
             }
+
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
             return View(await _context.Sessions.ToListAsync());
         }
 
@@ -195,5 +200,48 @@ namespace Exo_MVC1.Controllers
         {
             return _context.Sessions.Any(e => e.Id == id);
         }
+
+        // Export to Excel
+        [HttpGet]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            // Set the license context
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Fetch sessions from the database
+            var sessions = await _context.Sessions.ToListAsync(); // Await the async operation
+
+            using (var package = new ExcelPackage())
+            {
+                // Create a worksheet
+                var worksheet = package.Workbook.Worksheets.Add("Sessions");
+
+                // Add headers
+                worksheet.Cells[1, 1].Value = "ID";
+                worksheet.Cells[1, 2].Value = "Nom";
+
+                // Populate the worksheet with data from the database
+                for (int i = 0; i < sessions.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1].Value = sessions[i].Id;
+                    worksheet.Cells[i + 2, 2].Value = sessions[i].Nom;
+                }
+
+                // Auto-fit the columns for better readability
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                // Save the Excel file into a stream
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                // Create a dynamic filename based on the current timestamp
+                string excelName = $"sessions-{DateTime.Now:yyyyMMddHHmmssfff}.xlsx";
+
+                // Return the Excel file as a downloadable file
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+            }
+        }
+
     }
 }

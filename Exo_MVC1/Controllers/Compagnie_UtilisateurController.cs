@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
+using BCrypt.Net; // Add BCrypt.Net for password hashing
 
 namespace Exo_MVC1.Controllers
 {
@@ -18,43 +18,23 @@ namespace Exo_MVC1.Controllers
         {
             _context = context;
         }
+
         private bool IsAdminLoggedIn()
         {
             return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
         }
+
         // GET: Compagnie_Utilisateur
         public async Task<IActionResult> Index()
         {
-            if (!IsAdminLoggedIn())
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
-                return RedirectToAction("Login", "Admins");
+                return RedirectToAction("Login");
             }
+
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
             var applicationDbContext = _context.Compagnie_Utilisateurs.Include(c => c.Compagny).Include(c => c.Utilisateur);
             return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Compagnie_Utilisateur/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (!IsAdminLoggedIn())
-            {
-                return RedirectToAction("Login", "Admins");
-            }
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var compagnie_Utilisateur = await _context.Compagnie_Utilisateurs
-                .Include(c => c.Compagny)
-                .Include(c => c.Utilisateur)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (compagnie_Utilisateur == null)
-            {
-                return NotFound();
-            }
-
-            return View(compagnie_Utilisateur);
         }
 
         // GET: Compagnie_Utilisateur/Create
@@ -70,8 +50,6 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Compagnie_Utilisateur/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
@@ -80,8 +58,12 @@ namespace Exo_MVC1.Controllers
             {
                 return RedirectToAction("Login", "Admins");
             }
+
             if (ModelState.IsValid)
             {
+                // Hash the password before saving
+                compagnie_Utilisateur.Motdepasse = BCrypt.Net.BCrypt.HashPassword(compagnie_Utilisateur.Motdepasse);
+
                 _context.Add(compagnie_Utilisateur);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -114,8 +96,6 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Compagnie_Utilisateur/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
@@ -133,6 +113,12 @@ namespace Exo_MVC1.Controllers
             {
                 try
                 {
+                    // Hash the new password if it was changed
+                    if (!string.IsNullOrEmpty(compagnie_Utilisateur.Motdepasse))
+                    {
+                        compagnie_Utilisateur.Motdepasse = BCrypt.Net.BCrypt.HashPassword(compagnie_Utilisateur.Motdepasse);
+                    }
+
                     _context.Update(compagnie_Utilisateur);
                     await _context.SaveChangesAsync();
                 }
@@ -151,30 +137,6 @@ namespace Exo_MVC1.Controllers
             }
             ViewData["Id_compagnie"] = new SelectList(_context.Compagnyes, "Id", "Compagnie", compagnie_Utilisateur.Id_compagnie);
             ViewData["Id_utilisateur"] = new SelectList(_context.Utilisateurs, "Id", "Nom", compagnie_Utilisateur.Id_utilisateur);
-            return View(compagnie_Utilisateur);
-        }
-
-        // GET: Compagnie_Utilisateur/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (!IsAdminLoggedIn())
-            {
-                return RedirectToAction("Login", "Admins");
-            }
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var compagnie_Utilisateur = await _context.Compagnie_Utilisateurs
-                .Include(c => c.Compagny)
-                .Include(c => c.Utilisateur)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (compagnie_Utilisateur == null)
-            {
-                return NotFound();
-            }
-
             return View(compagnie_Utilisateur);
         }
 

@@ -2,33 +2,43 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
+<style>
+    .bg-blue {
+        background-color: #007bff; /* Adjust this to your preferred shade of blue */
+        color: white; /* Text color */
+        border: none; /* Optional: remove border */
+        padding: 0.375rem 0.75rem; /* Padding for the button */
+        border-radius: 0.25rem; /* Optional: rounded corners */
+    }
 
-<h1>Edit</h1>
+        .bg-blue:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            color: white; /* Maintain text color on hover */
+        }
 
-<h4>Compagny</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+</style>
+
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Compagnie" class="control-label"></label>
-                <input asp-for="Compagnie" class="form-control" />
+                <label asp-for="Compagnie" class="control-label text-black"></label>
+                <input asp-for="Compagnie" class="form-control bg-white mb-3" required/>
                 <span asp-validation-for="Compagnie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Modifier" class="btn bg-blue" />
             </div>
         </form>
-    </div>
-</div>
 
+@* 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+ *@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

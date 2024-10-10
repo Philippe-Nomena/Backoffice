@@ -19,17 +19,21 @@ namespace Exo_MVC1.Controllers
             _context=context;
         }
 
-       
+
         public async Task<IActionResult> Index()
         {
-          
+        
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
                 return RedirectToAction("Login");
             }
 
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
+
             return View(await _context.Admins.ToListAsync());
         }
+
 
         public IActionResult Privacy()
         {

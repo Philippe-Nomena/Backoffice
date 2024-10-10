@@ -563,3 +563,7 @@ C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\obj\Debug\net8.0\refint\E
 C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\obj\Debug\net8.0\Exo_MVC1.pdb
 C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\obj\Debug\net8.0\Exo_MVC1.genruntimeconfig.cache
 C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\obj\Debug\net8.0\ref\Exo_MVC1.dll
+C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\bin\Debug\net8.0\EPPlus.dll
+C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\bin\Debug\net8.0\EPPlus.Interfaces.dll
+C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\bin\Debug\net8.0\EPPlus.System.Drawing.dll
+C:\Users\philippe\Documents\GitHub\Backoffice\Exo_MVC1\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll

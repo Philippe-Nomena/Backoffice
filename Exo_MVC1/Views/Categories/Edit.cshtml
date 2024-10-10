@@ -2,63 +2,71 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
+        <style>
+    .bg-blue {
+        background-color: #007bff; /* Adjust this to your preferred shade of blue */
+        color: white; /* Text color */
+        border: none; /* Optional: remove border */
+        padding: 0.375rem 0.75rem; /* Padding for the button */
+        border-radius: 0.25rem; /* Optional: rounded corners */
+    }
 
-<h1>Edit</h1>
+        .bg-blue:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            color: white; /* Maintain text color on hover */
+        }
 
-<h4>Categorie</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        </style>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Categories" class="control-label"></label>
-                <input asp-for="Categories" class="form-control" />
+                <input asp-for="Categories" class="form-control bg-white" required />
                 <span asp-validation-for="Categories" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Horaire" class="control-label"></label>
-                <input asp-for="Horaire" class="form-control" />
+                <input asp-for="Horaire" class="form-control bg-white" required />
                 <span asp-validation-for="Horaire" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Prix" class="control-label"></label>
-                <input asp-for="Prix" class="form-control" />
+                <input asp-for="Prix" class="form-control bg-white" required />
                 <span asp-validation-for="Prix" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Jour" class="control-label"></label>
-                <input asp-for="Jour" class="form-control" />
+                <input asp-for="Jour" class="form-control bg-white" required />
                 <span asp-validation-for="Jour" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Datedebut" class="control-label"></label>
-                <input asp-for="Datedebut" class="form-control" />
+                <input asp-for="Datedebut" class="form-control bg-white" required />
                 <span asp-validation-for="Datedebut" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Datefin" class="control-label"></label>
-                <input asp-for="Datefin" class="form-control" />
+                <input asp-for="Datefin" class="form-control bg-white" required />
                 <span asp-validation-for="Datefin" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_activite" class="control-label"></label>
-                <select asp-for="Id_activite" class="form-control" asp-items="ViewBag.Id_activite"></select>
+                <select asp-for="Id_activite" class="form-control bg-white mb-3" required asp-items="ViewBag.Id_activite"></select>
                 <span asp-validation-for="Id_activite" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Modifier" class="btn bg-blue" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+ *@

@@ -26,10 +26,13 @@ namespace Exo_MVC1.Controllers
         public async Task<IActionResult> Index()
         {
 
-            if (!IsAdminLoggedIn())
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
-                return RedirectToAction("Login", "Admins");
+                return RedirectToAction("Login");
             }
+
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
             var applicationDbContext = _context.Activites.Include(a => a.Compagny);
             return View(await applicationDbContext.ToListAsync());
         }

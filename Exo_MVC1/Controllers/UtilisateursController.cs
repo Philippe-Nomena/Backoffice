@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
+using OfficeOpenXml;
 
 namespace Exo_MVC1.Controllers
 {
@@ -27,11 +28,13 @@ namespace Exo_MVC1.Controllers
         // GET: Utilisateurs
         public async Task<IActionResult> Index()
         {
-            // Redirect to login if admin is not logged in
-            if (!IsAdminLoggedIn())
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
-                return RedirectToAction("Login", "Admins"); // Adjust the controller and action as needed
+                return RedirectToAction("Login");
             }
+
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
             return View(await _context.Utilisateurs.ToListAsync());
         }
 
@@ -163,6 +166,47 @@ namespace Exo_MVC1.Controllers
         private bool UtilisateurExists(int id)
         {
             return _context.Utilisateurs.Any(e => e.Id == id);
+        }
+        // Export to Excel
+        [HttpGet]
+        public async Task<IActionResult> ExportToExcel()
+        {
+    
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+       
+            var utilisateurs = await _context.Utilisateurs.ToListAsync(); 
+
+            using (var package = new ExcelPackage())
+            {
+                // Create a worksheet
+                var worksheet = package.Workbook.Worksheets.Add("Utilisateurs");
+
+                // Add headers
+                worksheet.Cells[1, 1].Value = "ID";
+                worksheet.Cells[1, 2].Value = "Nom";
+
+                // Populate the worksheet with data from the database
+                for (int i = 0; i < utilisateurs.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1].Value = utilisateurs[i].Id;
+                    worksheet.Cells[i + 2, 2].Value = utilisateurs[i].Nom;
+                }
+
+                // Auto-fit the columns for better readability
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                // Save the Excel file into a stream
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                // Create a dynamic filename based on the current timestamp
+                string excelName = $"utilisateurs-{DateTime.Now:yyyyMMddHHmmssfff}.xlsx";
+
+                // Return the Excel file as a downloadable file
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+            }
         }
     }
 }

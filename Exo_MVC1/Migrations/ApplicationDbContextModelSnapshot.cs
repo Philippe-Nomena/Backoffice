@@ -355,6 +355,28 @@ namespace Exo_MVC1.Migrations
                     b.ToTable("Sessions");
                 });
 
+            modelBuilder.Entity("Exo_MVC1.Models.UploadExcel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("longtext")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Sexe")
+                        .HasColumnType("longtext")
+                        .HasColumnName("sexe");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UploadExcels");
+                });
+
             modelBuilder.Entity("Exo_MVC1.Models.Utilisateur", b =>
                 {
                     b.Property<int>("Id")

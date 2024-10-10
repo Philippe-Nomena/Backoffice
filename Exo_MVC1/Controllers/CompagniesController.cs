@@ -25,10 +25,12 @@ namespace Exo_MVC1.Controllers
         // GET: Compagnies
         public async Task<IActionResult> Index()
         {
-            if (!IsAdminLoggedIn())
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
-                return RedirectToAction("Login", "Admins");
+                return RedirectToAction("Login");
             }
+
+            ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
             return View(await _context.Compagnyes.ToListAsync());
         }
 

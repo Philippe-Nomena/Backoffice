@@ -2,157 +2,164 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var categoriesJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Categories);
+
+
 }
 
-<h1>Edit</h1>
+<style>
+    .bg-blue {
+        background-color: #007bff; /* Adjust this to your preferred shade of blue */
+        color: white; /* Text color */
+        border: none; /* Optional: remove border */
+        padding: 0.375rem 0.75rem; /* Padding for the button */
+        border-radius: 0.25rem; /* Optional: rounded corners */
+    }
 
-<h4>Pratiquant</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        .bg-blue:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            color: white; /* Maintain text color on hover */
+        }
+
+</style>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Id_session" class="control-label"></label>
-                <select asp-for="Id_session" class="form-control" asp-items="ViewBag.Id_session"></select>
+                <select asp-for="Id_session" class="form-control bg-white" asp-items="ViewBag.Id_session"></select>
                 <span asp-validation-for="Id_session" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" />
+                <input asp-for="Nom" class="form-control bg-white" />
                 <span asp-validation-for="Nom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sexe" class="control-label"></label>
-                <input asp-for="Sexe" class="form-control" />
+                <input asp-for="Sexe" class="form-control bg-white" />
                 <span asp-validation-for="Sexe" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Naissance" class="control-label"></label>
-                <input asp-for="Naissance" class="form-control" />
+                <input asp-for="Naissance" class="form-control bg-white" />
                 <span asp-validation-for="Naissance" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Payement" class="control-label"></label>
-                <input asp-for="Payement" class="form-control" />
+                <input asp-for="Payement" class="form-control bg-white" />
                 <span asp-validation-for="Payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Consigne" class="control-label"></label>
-                <input asp-for="Consigne" class="form-control" />
+                <input asp-for="Consigne" class="form-control bg-white" />
                 <span asp-validation-for="Consigne" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Carte_fede" class="control-label"></label>
-                <input asp-for="Carte_fede" class="form-control" />
+                <input asp-for="Carte_fede" class="form-control bg-white" />
                 <span asp-validation-for="Carte_fede" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Etiquete" class="control-label"></label>
-                <input asp-for="Etiquete" class="form-control" />
+                <input asp-for="Etiquete" class="form-control bg-white" />
                 <span asp-validation-for="Etiquete" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Courriel" class="control-label"></label>
-                <input asp-for="Courriel" class="form-control" />
+                <input asp-for="Courriel" class="form-control bg-white" />
                 <span asp-validation-for="Courriel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Adresse" class="control-label"></label>
-                <input asp-for="Adresse" class="form-control" />
+                <input asp-for="Adresse" class="form-control bg-white" />
                 <span asp-validation-for="Adresse" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control" />
+                <input asp-for="Telephone" class="form-control bg-white" />
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tel_urgence" class="control-label"></label>
-                <input asp-for="Tel_urgence" class="form-control" />
+                <input asp-for="Tel_urgence" class="form-control bg-white" />
                 <span asp-validation-for="Tel_urgence" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_activite" class="control-label"></label>
-                <select asp-for="Id_activite" class="form-control" asp-items="ViewBag.Id_activite"></select>
+        <select asp-for="Id_activite" class="form-control bg-white" asp-items="ViewBag.Id_activite" id="activiteDropdown"></select>
                 <span asp-validation-for="Id_activite" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Id_categorie" class="control-label"></label>
-                <select asp-for="Id_categorie" class="form-control" asp-items="ViewBag.Id_categorie"></select>
-                <span asp-validation-for="Id_categorie" class="text-danger"></span>
-            </div>
+    <div class="form-group">
+        <label asp-for="Id_categorie" class="control-label"></label>
+        <select asp-for="Id_categorie" class="form-control bg-white" id="categorieDropdown">
+            <option value="">Select Categorie</option>
+        </select>
+    </div>
             <div class="form-group">
                 <label asp-for="Evaluation" class="control-label"></label>
-                <input asp-for="Evaluation" class="form-control" />
+                <input asp-for="Evaluation" class="form-control bg-white" />
                 <span asp-validation-for="Evaluation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Mode_payement" class="control-label"></label>
-                <input asp-for="Mode_payement" class="form-control" />
+                <input asp-for="Mode_payement" class="form-control bg-white" />
                 <span asp-validation-for="Mode_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Carte_payement" class="control-label"></label>
-                <input asp-for="Carte_payement" class="form-control" />
+                <input asp-for="Carte_payement" class="form-control bg-white" />
                 <span asp-validation-for="Carte_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Groupe" class="control-label"></label>
-                <input asp-for="Groupe" class="form-control" />
+                <input asp-for="Groupe" class="form-control bg-white mb-3" />
                 <span asp-validation-for="Groupe" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Modifier" class="btn bg-blue" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+
+@* <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#Id_activite').change(function () {
-                var activiteId = $(this).val();
-                if (activiteId) {
-                    $.ajax({
-                        url: '@Url.Action("GetCategories")',
-                        type: 'GET',
-                        data: { activiteId: activiteId },
-                        success: function (data) {
-                            var $categorieDropdown = $('#Id_categorie');
-                            $categorieDropdown.empty();
-                            $categorieDropdown.append('<option value="">Select Categorie</option>');
-                            $.each(data, function (index, category) {
-                                $categorieDropdown.append('<option value="' + category.id + '">' + category.name + '</option>');
-                            });
+            // Parse the categories JSON from the hidden field
+            var categories = @Html.Raw(categoriesJson);
 
-                            // Set the current value if it's in the new list
-                            var currentCategory = '@Model.Id_categorie';
-                            $categorieDropdown.val(currentCategory);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("AJAX error:", status, error);
-                        }
+            $('#activiteDropdown').change(function () {
+                var activiteId = $(this).val();
+                var $categorieDropdown = $('#categorieDropdown');
+
+                // Clear the categories dropdown
+                $categorieDropdown.empty();
+                $categorieDropdown.append('<option value="">Select Categorie</option>');
+
+                // Filter categories based on selected activiteId
+                if (activiteId) {
+                    var filteredCategories = categories.filter(function (category) {
+                        // Adjust this condition according to your category model
+                        return category.Id_activite == activiteId;
                     });
+
+                    // Populate categories dropdown
+                    if (filteredCategories.length > 0) {
+                        $.each(filteredCategories, function (index, category) {
+                            $categorieDropdown.append('<option value="' + category.Id + '">' + category.Categories + '</option>');
+                        });
+                    } else {
+                        $categorieDropdown.append('<option value="">No categories available</option>');
+                    }
                 } else {
-                    $('#Id_categorie').empty().append('<option value="">Select Categorie</option>');
+                    // Reset if no activite is selected
+                    $categorieDropdown.append('<option value="">Select Categorie</option>');
                 }
             });
-
-            // Trigger change event on page load if needed
-            var initialActiviteId = $('#Id_activite').val();
-            if (initialActiviteId) {
-                $('#Id_activite').trigger('change');
-            }
         });
     </script>
 }

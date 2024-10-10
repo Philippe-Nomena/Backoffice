@@ -4,24 +4,24 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// Configure Identity with default options
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Configure authentication with cookie settings
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Admins/Login"; // Specify the login path
-    options.AccessDeniedPath = "/Admins/AccessDenied"; // Optional: specify a path for access denied
+    options.LoginPath = "/Admins/Login";
+    options.AccessDeniedPath = "/Admins/AccessDenied";
 });
 
 builder.Services.AddAuthorization(options =>
@@ -32,14 +32,13 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
-    options.Cookie.HttpOnly = true; // Make the cookie HTTP only
-    options.Cookie.IsEssential = true; // Make the cookie essential
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true; 
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -54,9 +53,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseSession(); // Ensure session middleware is used before authentication
+app.UseSession(); 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseDeveloperExceptionPage();
 
 app.MapControllerRoute(
     name: "default",
