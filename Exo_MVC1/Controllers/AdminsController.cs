@@ -101,7 +101,8 @@ namespace Exo_MVC1.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Invalid username or password.");
+                //ModelState.AddModelError("", "Invalid username or password.");
+                return RedirectToAction("Error", "Home");
             }
 
             return View(model);
@@ -124,20 +125,47 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Admins/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Nom,Username,Motdepasse")] Admin admin)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Hash the password
+        //        admin.Motdepasse = BCrypt.Net.BCrypt.HashPassword(admin.Motdepasse);
+        //        _context.Add(admin);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(admin);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nom,Username,Motdepasse")] Admin admin)
         {
             if (ModelState.IsValid)
             {
-                // Hash the password
-                admin.Motdepasse = BCrypt.Net.BCrypt.HashPassword(admin.Motdepasse);
-                _context.Add(admin);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Hash the password
+                    admin.Motdepasse = BCrypt.Net.BCrypt.HashPassword(admin.Motdepasse);
+                    _context.Add(admin);
+                    await _context.SaveChangesAsync();
+
+                    // Set success message in TempData
+                    TempData["SuccessMessage"] = "Admin created successfully!";
+                    //return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Set error message in TempData
+                    TempData["ErrorMessage"] = "An error occurred while creating the admin.";
+                    // Log the exception if necessary
+                }
             }
             return View(admin);
         }
+
 
         // GET: Admins/Edit/5
         public async Task<IActionResult> Edit(int? id)

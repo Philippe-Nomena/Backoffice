@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Newtonsoft.Json;
 namespace Exo_MVC1.Models
 {
     public class Pratiquant
@@ -26,7 +26,7 @@ namespace Exo_MVC1.Models
         public DateTime Naissance { get; set; }
 
         [Column("payement")]
-        public int Payement { get; set; }
+        public string Payement { get; set; }
 
         [Column("consigne")]
         public string Consigne { get; set; }
@@ -72,7 +72,20 @@ namespace Exo_MVC1.Models
 
         [Column("groupe")]
         public string Groupe { get; set; }
-
+         [NotMapped]
+        public string[]? GroupeArray
+        {
+            get
+            {
+                
+                return !string.IsNullOrEmpty(Groupe) ? JsonConvert.DeserializeObject<string[]>(Groupe) : new string[0];
+            }
+            set
+            {
+     
+                Groupe = JsonConvert.SerializeObject(value);
+            }
+        }
 
     }
 }

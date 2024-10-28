@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\admins\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\admins\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\admins\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,67 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Pratiquants\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Edit.cshtml",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Edit.cshtml",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAQwKQAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-10T10:04:16.246Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "ViewState": "AQIAAC0BAAAAAAAAAAAUwFkBAAAoAAAA",
+              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Admins\\Index.cshtml",
+              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Admins\\Index.cshtml",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Admins\\Index.cshtml",
+              "RelativeToolTip": "Exo_MVC1\\Views\\Admins\\Index.cshtml",
+              "ViewState": "AQIAACUAAAAAAAAAAAAAACkAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-10T09:21:13.551Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-10T08:34:15.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PratiquantsController.cs",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "RelativeToolTip": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "ViewState": "AQIAAI0AAAAAAAAAAAAvwKkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T14:37:48.295Z",
+              "WhenOpened": "2024-10-25T11:51:52.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Create.cshtml",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Pratiquants\\Create.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Create.cshtml",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Create.cshtml",
-              "ViewState": "AQIAAIEAAAAAAAAAAAAAAKUAAAABAAAA",
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Admins\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Admins\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Admins\\Delete.cshtml",
+              "RelativeToolTip": "Exo_MVC1\\Views\\Admins\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-09T14:25:02.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T11:50:06.756Z"
             }
           ]
         }

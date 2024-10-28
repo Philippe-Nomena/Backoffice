@@ -2,42 +2,53 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
-<h1>Edit</h1>
+<style>
+    .bg-blue {
+        background-color: #007bff; /* Adjust this to your preferred shade of blue */
+        color: white; /* Text color */
+        border: none; /* Optional: remove border */
+        padding: 0.375rem 0.75rem; /* Padding for the button */
+        border-radius: 0.25rem; /* Optional: rounded corners */
+    }
 
-<h4>Admin</h4>
+        .bg-blue:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            color: white; /* Maintain text color on hover */
+        }
+
+</style>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" />
+                <input asp-for="Nom" class="form-control bg-white"  required/>
                 <span asp-validation-for="Nom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" class="form-control bg-white"  required/>
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Motdepasse" class="control-label"></label>
-                <input asp-for="Motdepasse" class="form-control" />
+                <input asp-for="Motdepasse" class="form-control bg-white mb-3"  required/>
                 <span asp-validation-for="Motdepasse" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn bg-blue" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
+
+@* <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

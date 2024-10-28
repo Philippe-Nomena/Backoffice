@@ -46,6 +46,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Identity.Web" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
   </ItemGroup>
 
@@ -76,6 +77,13 @@
     <None Include="wwwroot\lib\tempusdominus\js\tempusdominus-bootstrap-4.min.js" />
     <None Include="wwwroot\lib\waypoints\links.php" />
     <None Include="wwwroot\lib\waypoints\waypoints.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Compagnie_Utilisateur\Error.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

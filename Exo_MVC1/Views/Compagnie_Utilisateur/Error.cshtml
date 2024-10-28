@@ -47,17 +47,11 @@
                             <h3 class="text-danger"><i class="fa fa-exclamation-triangle me-2"></i>Error</h3>
                         </div>
                         <h4 class="text-danger">Oops! Something went wrong.</h4>
-                        <p>Password or username invalid !</p>
+                        <p>Username is already taken!</p>
 
-                        @if (Model.ShowRequestId)
-                        {
-                            <p>
-                                <strong>Request ID:</strong> <code>@Model.RequestId</code>
-                              
-                            </p>
-                        }
+                      
 
-                        <a href="/" class="btn btn-primary py-3 w-100 mt-4">Se connecter</a>
+                        <a href="/Compagnie_Utilisateur/index" class="btn btn-primary py-3 w-100 mt-4">Retour</a>
                     </div>
                 </div>
             </div>

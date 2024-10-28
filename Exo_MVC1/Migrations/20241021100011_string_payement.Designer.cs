@@ -4,6 +4,7 @@ using Exo_MVC1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exo_MVC1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241021100011_string_payement")]
+    partial class string_payement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasIndex("Id_compagnie");
 
-                    b.ToTable("activites", (string)null);
+                    b.ToTable("Activites");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Admin", b =>
@@ -75,7 +78,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Categorie", b =>
@@ -122,7 +125,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasIndex("Id_activite");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Compagnie_Utilisateur", b =>
@@ -158,7 +161,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasIndex("Id_utilisateur");
 
-                    b.ToTable("compagnie_utilisateurs", (string)null);
+                    b.ToTable("Compagnie_Utilisateurs");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Compagny", b =>
@@ -177,7 +180,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("compagnies", (string)null);
+                    b.ToTable("Compagnyes");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Pratiquant", b =>
@@ -283,7 +286,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasIndex("Id_session");
 
-                    b.ToTable("pratiquants", (string)null);
+                    b.ToTable("Pratiquants");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Presence", b =>
@@ -334,7 +337,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasIndex("Id_session");
 
-                    b.ToTable("presences", (string)null);
+                    b.ToTable("Presences");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Session", b =>
@@ -353,7 +356,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("sessions", (string)null);
+                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.UploadExcel", b =>
@@ -375,7 +378,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("uploadexcels", (string)null);
+                    b.ToTable("UploadExcels");
                 });
 
             modelBuilder.Entity("Exo_MVC1.Models.Utilisateur", b =>
@@ -394,7 +397,7 @@ namespace Exo_MVC1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("utilisateurs", (string)null);
+                    b.ToTable("Utilisateurs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

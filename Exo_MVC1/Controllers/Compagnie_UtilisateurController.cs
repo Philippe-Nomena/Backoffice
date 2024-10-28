@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
-using BCrypt.Net; // Add BCrypt.Net for password hashing
+using BCrypt.Net;
 
 namespace Exo_MVC1.Controllers
 {
@@ -50,6 +50,28 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Compagnie_Utilisateur/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
+        //{
+        //    if (!IsAdminLoggedIn())
+        //    {
+        //        return RedirectToAction("Login", "Admins");
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Hash the password before saving
+        //        compagnie_Utilisateur.Motdepasse = BCrypt.Net.BCrypt.HashPassword(compagnie_Utilisateur.Motdepasse);
+
+        //        _context.Add(compagnie_Utilisateur);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["Id_compagnie"] = new SelectList(_context.Compagnyes, "Id", "Compagnie", compagnie_Utilisateur.Id_compagnie);
+        //    ViewData["Id_utilisateur"] = new SelectList(_context.Utilisateurs, "Id", "Nom", compagnie_Utilisateur.Id_utilisateur);
+        //    return View(compagnie_Utilisateur);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Motdepasse,Id_utilisateur,Id_compagnie")] Compagnie_Utilisateur compagnie_Utilisateur)
@@ -61,17 +83,32 @@ namespace Exo_MVC1.Controllers
 
             if (ModelState.IsValid)
             {
-                // Hash the password before saving
-                compagnie_Utilisateur.Motdepasse = BCrypt.Net.BCrypt.HashPassword(compagnie_Utilisateur.Motdepasse);
+               
+                bool usernameExists = await _context.Compagnie_Utilisateurs
+                    .AnyAsync(cu => cu.Username == compagnie_Utilisateur.Username);
 
-                _context.Add(compagnie_Utilisateur);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (usernameExists)
+                {
+                    return View("Error");
+
+                }
+                else
+                {
+                    // Hash the password before saving
+                    compagnie_Utilisateur.Motdepasse = BCrypt.Net.BCrypt.HashPassword(compagnie_Utilisateur.Motdepasse);
+
+                    _context.Add(compagnie_Utilisateur);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+
+            // Populate dropdowns if the model is not valid or username already exists
             ViewData["Id_compagnie"] = new SelectList(_context.Compagnyes, "Id", "Compagnie", compagnie_Utilisateur.Id_compagnie);
             ViewData["Id_utilisateur"] = new SelectList(_context.Utilisateurs, "Id", "Nom", compagnie_Utilisateur.Id_utilisateur);
             return View(compagnie_Utilisateur);
         }
+
 
         // GET: Compagnie_Utilisateur/Edit/5
         public async Task<IActionResult> Edit(int? id)
