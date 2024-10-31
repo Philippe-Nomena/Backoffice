@@ -31,7 +31,7 @@ namespace Exo_MVC1.Models
         public virtual Categorie? Categorie { get; set; }
 
         [Column("jour")]
-        public string Jour { get; set; }
+        public DateOnly Jour { get; set; }
 
         [Column("present")]
         public bool Present { get; set; }

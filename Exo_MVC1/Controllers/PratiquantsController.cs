@@ -47,6 +47,8 @@ namespace Exo_MVC1.Controllers
                 .Include(p => p.Session)
                 .ToListAsync();
 
+            Debug.WriteLine("MIDINA");
+
             var categoriesForActivite = await _context.Categories.ToListAsync();
             ViewData["CategoriesForActivite"] = categoriesForActivite;
 
@@ -115,13 +117,16 @@ namespace Exo_MVC1.Controllers
 
                 if (categorie != null)
                 {
-                    var currentDate = categorie.Datedebut;
-                    while (currentDate <= categorie.Datefin)
+                   
+                    DateOnly currentDate = categorie.Datedebut.Value;
+                    DateOnly endDate = categorie.Datefin.Value;
+
+                    while (currentDate <= endDate)
                     {
                         var presence = new Presence
                         {
                             Id_pratiquant = pratiquant.Id,
-                            Jour = currentDate.ToString(),
+                            Jour = currentDate, // Store currentDate directly as DateOnly
                             Present = false,
                             Abscence = true,
                             Id_activite = pratiquant.Id_activite,
@@ -130,7 +135,7 @@ namespace Exo_MVC1.Controllers
                         };
 
                         _context.Presences.Add(presence);
-                        currentDate = currentDate.AddDays(1);
+                        currentDate = currentDate.AddDays(1); // This is correct for DateOnly
                     }
                     await _context.SaveChangesAsync();
                 }
@@ -143,6 +148,7 @@ namespace Exo_MVC1.Controllers
             ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
             return View(pratiquant);
         }
+
 
         // GET: Pratiquants/Edit/5
         public async Task<IActionResult> Edit(int? id)

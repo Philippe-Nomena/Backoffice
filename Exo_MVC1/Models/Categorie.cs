@@ -41,10 +41,10 @@ namespace Exo_MVC1.Models
         }
 
         [Column("datedebut")]
-        public DateTime Datedebut { get; set; }
+        public DateOnly? Datedebut { get; set; }
 
         [Column("datefin")]
-        public DateTime Datefin { get; set; }
+        public DateOnly? Datefin { get; set; }
 
         [Column("id_activite")]
         [DisplayName("activite")]

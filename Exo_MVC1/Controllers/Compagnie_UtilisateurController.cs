@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Exo_MVC1.Data;
 using Exo_MVC1.Models;
 using BCrypt.Net;
+using System.Diagnostics;
 
 namespace Exo_MVC1.Controllers
 {
@@ -25,7 +26,7 @@ namespace Exo_MVC1.Controllers
         }
 
         // GET: Compagnie_Utilisateur
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Id_compagnie)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
             {
@@ -33,9 +34,36 @@ namespace Exo_MVC1.Controllers
             }
 
             ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
-            var applicationDbContext = _context.Compagnie_Utilisateurs.Include(c => c.Compagny).Include(c => c.Utilisateur);
-            return View(await applicationDbContext.ToListAsync());
+
+            IQueryable<Compagnie_Utilisateur> applicationDbContext;
+
+            if (Id_compagnie.HasValue)
+            {
+                Debug.WriteLine("tsy null lery");
+                applicationDbContext = _context.Compagnie_Utilisateurs
+                    .Include(c => c.Compagny)
+                    .Include(c => c.Utilisateur)
+                    .Where(a => a.Id_compagnie == Id_compagnie);
+            }
+            else
+            {
+                Debug.WriteLine("null lery");
+                applicationDbContext = _context.Compagnie_Utilisateurs
+                    .Include(c => c.Compagny)
+                    .Include(c => c.Utilisateur);
+            }
+
+            // Utilisation de ToListAsync() pour une récupération asynchrone
+            var resultList = await applicationDbContext.ToListAsync();
+
+            // Récupération des compagnies de manière asynchrone
+            var compagnies = await _context.Compagnyes.ToListAsync();
+
+            ViewData["compagnies"] = compagnies;
+
+            return View(resultList); // Utilisez resultList directement
         }
+
 
         // GET: Compagnie_Utilisateur/Create
         public IActionResult Create()
@@ -195,6 +223,33 @@ namespace Exo_MVC1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Compagnie_Utilisateur/UtilisateurByCompagnie
+        //public async Task<IActionResult> UtilisateurByCompagnie(int Id_compagnie)
+        //{
+        //    if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+
+        //    ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
+        //    // Retrieve the list of companies
+        //    var compagnies = _context.Compagnyes.ToList();
+        //    ViewBag.listCompanies = compagnies;
+
+        //    // Retrieve the list of users associated with the specified company ID
+        //    var utilisateurs = await _context.Compagnie_Utilisateurs
+        //        .Include(p => p.Utilisateur)
+        //        .Where(p => p.Compagny.Id == Id_compagnie)
+        //        .ToListAsync();
+
+        //    Debug.WriteLine("===============User List================");
+        //    ViewData["utilisateurs"]=utilisateurs;
+        //    Debug.WriteLine("===============End of List================");
+
+        //    return View("~/Views/Compagnie_Utilisateur/Index.cshtml");
+        //}
 
         private bool Compagnie_UtilisateurExists(int id)
         {

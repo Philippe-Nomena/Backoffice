@@ -23,7 +23,7 @@ namespace Exo_MVC1.Models
         public string Sexe { get; set; }
 
         [Column("naissance")]
-        public DateTime Naissance { get; set; }
+        public DateOnly Naissance { get; set; }
 
         [Column("payement")]
         public string Payement { get; set; }

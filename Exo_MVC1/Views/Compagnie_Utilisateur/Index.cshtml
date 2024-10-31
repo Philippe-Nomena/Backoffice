@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = null;
+    var listecompagnie = ViewData["compagnies"] as List<Compagny>;
 }
 
 
@@ -42,6 +43,9 @@
 
 <body>
     <div class="bg-dark container-fluid position-relative d-flex p-0">
+     
+       
+        <p></p>
         <!-- Spinner Start -->
         <div id="spinner" class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -117,10 +121,30 @@
             <!-- Navbar End -->
             <!-- Button to trigger modal -->
             <h3 class="text-white m-lg-4">Utilisateur par compagnie</h3>
-            <p class="m-lg-4 ">
 
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
-            </p>
+       
+                <div class="d-flex  m-lg-4">
+
+
+                <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
+
+                    <form action="/Compagnie_Utilisateur/Index" method="get">
+                        <div class="input-group">
+                          
+                            <select id="Id_compagnie" class="me-2" name="Id_compagnie">
+                                @foreach (var v in listecompagnie)
+                                {
+                                    <option value="@v.Id">@v.Compagnie</option>
+                                }
+                            </select>
+                      
+                            <button type="submit" class="btn btn-secondary">Filtrer</button>
+                        </div>
+                    </form>
+                </div>
+         
+
+
 
             <!-- Create Modal -->
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
