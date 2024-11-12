@@ -20,5 +20,7 @@ namespace Exo_MVC1.Models
         public int Id_compagnie { get; set; }
         [ForeignKey("Id_compagnie")]
         public virtual Compagny? Compagny { get; set; }
+
+        public virtual ICollection<Pratiquant>? Pratiquants { get; set; }
     }
 }

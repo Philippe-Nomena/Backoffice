@@ -11,5 +11,7 @@ namespace Exo_MVC1.Models
         [Required]
         [Column("compagnie")]
         public string Compagnie { get; set; }
+
+        public virtual ICollection<Activite> ?Activites { get; set; }
     }
 }

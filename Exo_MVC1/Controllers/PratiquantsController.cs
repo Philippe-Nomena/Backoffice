@@ -12,6 +12,7 @@ using Exo_MVC1.Models;
 using Microsoft.AspNetCore.Http; 
 using System.Diagnostics;
 using Microsoft.VisualStudio.TextTemplating;
+using Newtonsoft.Json;
 
 namespace Exo_MVC1.Controllers
 {
@@ -31,7 +32,7 @@ namespace Exo_MVC1.Controllers
         }
 
         // GET: Pratiquants
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Id_compagnie)
         {
 
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
@@ -41,11 +42,30 @@ namespace Exo_MVC1.Controllers
 
             ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
 
-            var pratiquants = await _context.Pratiquants
-                .Include(p => p.Ativite)
-                .Include(p => p.Categorie)
-                .Include(p => p.Session)
-                .ToListAsync();
+            var listecompagnie = _context.Compagnyes.ToList();
+            ViewData["liste"] = listecompagnie;
+
+            var pratiquants = new List<Pratiquant>();
+
+            if (Id_compagnie.HasValue)
+            {
+                var pratiquantsliste = await _context.Pratiquants
+                    .Include(p => p.Ativite)
+                    .Include(p => p.Categorie)
+                    .Include(p => p.Session)
+                    .Where(a => a.Ativite.Id_compagnie == Id_compagnie.Value)
+                    .ToListAsync();
+                pratiquants.AddRange(pratiquantsliste);
+            }
+            else
+            {
+                var pratiquantsliste = await _context.Pratiquants
+                    .Include(p => p.Ativite)
+                    .Include(p => p.Categorie)
+                    .Include(p => p.Session)
+                    .ToListAsync();
+                pratiquants.AddRange(pratiquantsliste);
+            }
 
             Debug.WriteLine("MIDINA");
 
@@ -126,7 +146,7 @@ namespace Exo_MVC1.Controllers
                         var presence = new Presence
                         {
                             Id_pratiquant = pratiquant.Id,
-                            Jour = currentDate, // Store currentDate directly as DateOnly
+                            Jour = currentDate, 
                             Present = false,
                             Abscence = true,
                             Id_activite = pratiquant.Id_activite,
@@ -135,7 +155,7 @@ namespace Exo_MVC1.Controllers
                         };
 
                         _context.Presences.Add(presence);
-                        currentDate = currentDate.AddDays(1); // This is correct for DateOnly
+                        currentDate = currentDate.AddDays(1); 
                     }
                     await _context.SaveChangesAsync();
                 }
@@ -447,5 +467,7 @@ namespace Exo_MVC1.Controllers
         }
 
 
+
+       
     }
 }

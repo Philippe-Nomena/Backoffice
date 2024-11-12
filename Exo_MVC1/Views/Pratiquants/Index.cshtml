@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = null;
+    var liste = ViewData["liste"] as List<Compagny>;
 }
 
 <head>
@@ -37,6 +38,7 @@
 
     <!-- Template Stylesheet -->
     <link href="~/css/style.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -116,12 +118,27 @@
             <!-- Navbar End -->
             <!-- Button to trigger modal -->
             <h3 class="text-white m-lg-4">Pratiquant</h3>
-            <p class="m-lg-4 " >
-               
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
-                <a class="btn btn-secondary" href="/Pratiquants/ExportToExcel">Exporter</a>
+           <div class="d-flex flex-row">
+               <div class="m-2">
+                        <p class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
+                    <a class="btn btn-secondary" href="/Pratiquants/ExportToExcel">Exporter</a>
 
-            </p>
+                </p>
+               </div>
+           
+                <div class="mt-2">
+                    <form action="/Pratiquants/Index" method="get" class="d-flex align-items-center gap-2">
+                        <select id="Id_compagnie" name="Id_compagnie" class="form-select border border-light">
+                            @foreach (var v in liste)
+                            {
+                                <option value="@v.Id">@v.Compagnie</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn bg-blue" style="background-color:#007bff; color:white">Filtrer</button>
+                    </form>
+                </div>
+           </div>
 
             <!-- Create Modal -->
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
