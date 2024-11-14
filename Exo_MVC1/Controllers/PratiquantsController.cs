@@ -32,6 +32,21 @@ namespace Exo_MVC1.Controllers
         }
 
         // GET: Pratiquants
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+
+        //    ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
+
+        //    // Await the async operation here
+        //    var pratiquants = await _context.Pratiquants.ToListAsync();
+        //    return View(pratiquants);
+        //}
+
         public async Task<IActionResult> Index(int? Id_compagnie)
         {
 
@@ -438,7 +453,7 @@ namespace Exo_MVC1.Controllers
                     worksheet.Cells[i + 2, 2].Value = pratiquant.Session?.Nom ?? "N/A";
                     worksheet.Cells[i + 2, 3].Value = pratiquant.Nom;
                     worksheet.Cells[i + 2, 4].Value = pratiquant.Sexe;
-                    worksheet.Cells[i + 2, 5].Value = pratiquant.Naissance.ToString("yyyy-MM-dd") ?? "N/A";
+                    worksheet.Cells[i + 2, 5].Value = pratiquant.Naissance.Value.ToString("dd/MM/yyyy") ?? "N/A";
                     worksheet.Cells[i + 2, 6].Value = pratiquant.Payement;
                     worksheet.Cells[i + 2, 7].Value = pratiquant.Consigne;
                     worksheet.Cells[i + 2, 8].Value = pratiquant.Carte_fede;
@@ -465,9 +480,58 @@ namespace Exo_MVC1.Controllers
                 return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Pratiquants.xlsx");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetPratiquantsChartData()
+        {
+            // Group pratiquants by activite and count them
+            var data = await _context.Pratiquants
+    .GroupBy(p => new { p.Id_activite, p.Ativite.Nom }) 
+    .Select(g => new
+    {
+        ActiviteId = g.Key.Id_activite,
+        ActiviteName = g.Key.Nom, 
+        Count = g.Count()
+    })
+    .ToListAsync();
+
+            // Group pratiquants by category and count them
+            var data1 = await _context.Pratiquants
+                .GroupBy(p => new { p.Id_categorie, p.Categorie.Categories})
+                .Select(a => new
+                {
+                    CategorieId = a.Key,
+                    CategorieName=a.Key.Categories,
+                    Count = a.Count()
+                })
+                .ToListAsync();
+
+           
+            var data2 = await _context.Pratiquants
+             .Include(p => p.Ativite) 
+             .ThenInclude(a => a.Compagny) 
+             .GroupBy(p => new { p.Ativite.Id_compagnie, p.Ativite.Compagny.Compagnie }) 
+             .Select(c => new
+     {
+         CompagnyId = c.Key.Id_compagnie,
+         CompagnyName = c.Key.Compagnie,
+         Count = c.Count()
+     })
+     .ToListAsync();
+
+            // Combine the results into a single object
+            var result = new
+            {
+                ActiviteData = data,
+                CategorieData = data1,
+                CompagnyData = data2
+            };
+
+
+            // Return the combined data in JSON format
+            return Json(result);
+        }
 
 
 
-       
     }
 }
