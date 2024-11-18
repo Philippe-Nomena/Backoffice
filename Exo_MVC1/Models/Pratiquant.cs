@@ -26,16 +26,20 @@ namespace Exo_MVC1.Models
         public DateOnly? Naissance { get; set; }
 
         [Column("payement")]
-        public string Payement { get; set; }
+        //public string Payement { get; set; }
+        public bool Payement { get; set; }
 
         [Column("consigne")]
-        public string Consigne { get; set; }
+        //public string Consigne { get; set; }
+        public bool Consigne { get; set; }
 
         [Column("carte_fede")]
-        public string Carte_fede { get; set; }
+        //public string Carte_fede { get; set; }
+        public bool Carte_fede { get; set; }
 
         [Column("etiquete")]
-        public string Etiquete { get; set; }
+        //public string Etiquete { get; set; }
+        public bool Etiquete { get; set; }
 
         [Column("courriel")]
         public string Courriel { get; set; }

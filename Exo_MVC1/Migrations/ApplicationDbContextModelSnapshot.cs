@@ -92,12 +92,12 @@ namespace Exo_MVC1.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("categorie");
 
-                    b.Property<DateOnly?>("Datedebut")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("Datedebut")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("datedebut");
 
-                    b.Property<DateOnly?>("Datefin")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("Datefin")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("datefin");
 
                     b.Property<string>("Horaire")
@@ -246,8 +246,8 @@ namespace Exo_MVC1.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("mode_payement");
 
-                    b.Property<DateOnly?>("Naissance")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("Naissance")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("naissance");
 
                     b.Property<string>("Nom")
@@ -315,8 +315,9 @@ namespace Exo_MVC1.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id_session");
 
-                    b.Property<DateOnly>("Jour")
-                        .HasColumnType("date")
+                    b.Property<string>("Jour")
+                        .IsRequired()
+                        .HasColumnType("longtext")
                         .HasColumnName("jour");
 
                     b.Property<bool>("Present")
@@ -599,7 +600,7 @@ namespace Exo_MVC1.Migrations
             modelBuilder.Entity("Exo_MVC1.Models.Activite", b =>
                 {
                     b.HasOne("Exo_MVC1.Models.Compagny", "Compagny")
-                        .WithMany("Activites")
+                        .WithMany()
                         .HasForeignKey("Id_compagnie")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -640,7 +641,7 @@ namespace Exo_MVC1.Migrations
             modelBuilder.Entity("Exo_MVC1.Models.Pratiquant", b =>
                 {
                     b.HasOne("Exo_MVC1.Models.Activite", "Ativite")
-                        .WithMany("Pratiquants")
+                        .WithMany()
                         .HasForeignKey("Id_activite")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -748,16 +749,6 @@ namespace Exo_MVC1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Exo_MVC1.Models.Activite", b =>
-                {
-                    b.Navigation("Pratiquants");
-                });
-
-            modelBuilder.Entity("Exo_MVC1.Models.Compagny", b =>
-                {
-                    b.Navigation("Activites");
                 });
 #pragma warning restore 612, 618
         }
