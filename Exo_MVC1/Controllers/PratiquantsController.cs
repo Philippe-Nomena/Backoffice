@@ -31,22 +31,6 @@ namespace Exo_MVC1.Controllers
             return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId"));
         }
 
-        // GET: Pratiquants
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    if (string.IsNullOrEmpty(HttpContext.Session.GetString("AdminId")))
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-
-        //    ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
-
-        //    // Await the async operation here
-        //    var pratiquants = await _context.Pratiquants.ToListAsync();
-        //    return View(pratiquants);
-        //}
-
         public async Task<IActionResult> Index(int? Id_compagnie)
         {
 
@@ -308,18 +292,7 @@ namespace Exo_MVC1.Controllers
             return _context.Pratiquants.Any(e => e.Id == id);
         }
 
-        // For dynamic category fetching based on selected activite
-        //[HttpGet]
-        //public JsonResult GetCategories(int activiteId)
-        //{
-        //    var categories = _context.Categories
-        //        .Where(c => c.Id_activite == activiteId)
-        //        .Select(c => new { Id = c.Id, Name = c.Categories }) // Ensure this matches your model
-        //        .ToList();
-
-        //    return Json(categories);
-        //}
-
+    
 
         [HttpPost]
         [ValidateAntiForgeryToken]

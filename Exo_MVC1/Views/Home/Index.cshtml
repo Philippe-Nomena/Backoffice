@@ -177,40 +177,38 @@
                 url: '@Url.Action("GetPratiquantsChartData", "Pratiquants")',
                 type: 'GET',
                 success: function (response) {
-                   
-
                     var activiteData = response.activiteData ? response.activiteData.map(function (item) {
                         return { x: item.activiteName, y: item.count };
                     }) : [];
 
                     var categorieData = response.categorieData ? response.categorieData.map(function (item) {
-                        return { x: item.categorieName, y: item.count };  
+                        return { x: item.categorieName, y: item.count };
                     }) : [];
 
                     var compagnyData = response.compagnyData ? response.compagnyData.map(function (item) {
                         return { x: item.compagnyName, y: item.count };
                     }) : [];
 
-             
+                    // Define colors for charts
+                    var colors = [
+                        '#ff5733', '#33ff57', '#3357ff', '#f39c12', '#8e44ad',
+                        '#1abc9c', '#3498db', '#e74c3c', '#2ecc71', '#d35400'
+                    ];
+
                     if (activiteData.length) {
                         var ctx1 = document.getElementById('activiteChart').getContext('2d');
                         new Chart(ctx1, {
-                            type: 'pie',  
+                            type: 'pie',
                             data: {
-                                labels: activiteData.map(item => item.x),  
+                                labels: activiteData.map(item => item.x),
                                 datasets: [{
-                                    label: 'Pratiquants by Activite',
-                                    data: activiteData.map(item => item.y),  
-                                    backgroundColor: '#ff5733'
+                                    label: 'Pratiquants par Activité',
+                                    data: activiteData.map(item => item.y),
+                                    backgroundColor: colors.slice(0, activiteData.length)
                                 }]
                             },
                             options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
+                                responsive: true
                             }
                         });
                     }
@@ -218,13 +216,13 @@
                     if (categorieData.length) {
                         var ctx2 = document.getElementById('categorieChart').getContext('2d');
                         new Chart(ctx2, {
-                            type: 'bar', 
+                            type: 'bar',
                             data: {
-                                labels: categorieData.map(item => item.x),  
+                                labels: categorieData.map(item => item.x),
                                 datasets: [{
-                                    label: 'Pratiquants by Categorie',
-                                    data: categorieData.map(item => item.y), 
-                                    backgroundColor: '#33ff57'
+                                    label: 'Pratiquants par Categorie',
+                                    data: categorieData.map(item => item.y),
+                                    backgroundColor: colors.slice(0, categorieData.length)
                                 }]
                             },
                             options: {
@@ -241,22 +239,17 @@
                     if (compagnyData.length) {
                         var ctx3 = document.getElementById('compagnyChart').getContext('2d');
                         new Chart(ctx3, {
-                            type: 'doughnut',  
+                            type: 'doughnut',
                             data: {
-                                labels: compagnyData.map(item => item.x),  
+                                labels: compagnyData.map(item => item.x),
                                 datasets: [{
-                                    label: 'Pratiquants by Compagny',
-                                    data: compagnyData.map(item => item.y),  
-                                    backgroundColor: '#3357ff'
+                                    label: 'Pratiquants par Compagnie',
+                                    data: compagnyData.map(item => item.y),
+                                    backgroundColor: colors.slice(0, compagnyData.length)
                                 }]
                             },
                             options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
+                                responsive: true
                             }
                         });
                     }
@@ -266,6 +259,7 @@
                 }
             });
         });
+
 
     </script>
 
