@@ -117,16 +117,20 @@
             <!-- Button to trigger modal -->
             <h3 class="text-white m-lg-4">Presence</h3>
       
-            <form action="/Presences/ByActiviteAndCompagnie" method="get">
-                <select id="Id_compagnie" name="Id_compagnie" class="ml-6">
-                    @foreach (var v in ViewBag.listCompanies as List<Compagny>)
-                    {
-                        <option value="@v.Id">@v.Compagnie</option>
+         
+                <form action="/Presences/ByActiviteAndCompagnie" method="get">
+                <div class="d-flex flex-row ml-6">
+                    <select id="Id_compagnie" name="Id_compagnie" class="border border-light">
+                        @foreach (var v in ViewBag.listCompanies as List<Compagny>)
+                        {
+                            <option value="@v.Id">@v.Compagnie</option>
 
-                    }
-                </select>
-                <button type="submit" class="btn btn-success ">Filtrer</button>
-            </form>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-success ml-2">Filtrer</button>
+                </div>
+                </form>
+        
 
         
 

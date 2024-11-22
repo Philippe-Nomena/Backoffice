@@ -292,94 +292,232 @@ namespace Exo_MVC1.Controllers
             return _context.Pratiquants.Any(e => e.Id == id);
         }
 
-    
+        // Custom function to convert various boolean-like values to true or false
+        private bool ParseBoolean(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return false;
 
+            value = value.Trim().ToLower();
+            return value switch
+            {
+                "1" or "true" or "yes" => true,
+                "0" or "false" or "no" => false,
+                _ => false, 
+            };
+        }
+        private DateOnly? ParseDate(string dateString)
+        {
+            // Define multiple possible formats to parse
+            var formats = new[] { "yyyy-MM-dd", "MM/dd/yyyy", "dd-MM-yyyy", "dd/MM/yyyy" };
+
+            // Trim input to remove extra spaces
+            dateString = dateString.Trim();
+
+            Console.WriteLine($"Attempting to parse date: '{dateString}'");
+
+            if (DateTime.TryParseExact(dateString, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var parsedDate))
+            {
+                Console.WriteLine($"Successfully parsed date: {parsedDate}");
+                return DateOnly.FromDateTime(parsedDate);
+            }
+
+            // Log failure
+            Console.WriteLine($"Failed to parse date: '{dateString}'");
+            return null;
+        }
+
+
+        private int? TryParseInt(string value)
+        {
+            if (int.TryParse(value, out var result))
+            {
+                return result;
+            }
+            else
+            {
+                Console.WriteLine($"Invalid Session value: {value}. Defaulting to null.");
+                return null;
+            }
+        }
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile csvFile)
         {
-
-            if (csvFile != null && csvFile.Length > 0)
+            if (csvFile == null || csvFile.Length == 0)
             {
+                ModelState.AddModelError("File", "Please upload a valid CSV file.");
+                return RedirectToAction("Index");
+            }
 
-                if (Path.GetExtension(csvFile.FileName).ToLower() == ".csv")
+            if (Path.GetExtension(csvFile.FileName).ToLower() != ".csv")
+            {
+                ModelState.AddModelError("File", "Only CSV files are allowed.");
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                var pratiquants = new List<Pratiquant>();
+                using (var streamReader = new StreamReader(csvFile.OpenReadStream()))
                 {
+                    string line;
+                    int row = 0;
 
-
-                    using (var streamReader = new StreamReader(csvFile.OpenReadStream()))
+                    while ((line = await streamReader.ReadLineAsync()) != null)
                     {
+                        row++;
+                        if (row == 1) continue; // Skip the header row
 
-                        string line;
-                        int row = 0;
+                        var values = line.Split(',');
 
-                        while ((line = await streamReader.ReadLineAsync()) != null)
+                        try
                         {
+                            // Map values to Pratiquant
+                            var session = _context.Sessions.FirstOrDefault(a => a.Nom.Equals(values[1]));
+                            var activite = _context.Activites.FirstOrDefault(a => a.Nom.Equals(values[13]));
+                            var categorie = _context.Categories.FirstOrDefault(a => a.Categories.Equals(values[14]));
 
-                            row++;
+                            var pratiquant = new Pratiquant
+                            {
+                                Id_session = session?.Id ?? 0,
+                                Nom = values[2],
+                                Sexe = values[3],
+                                Naissance = TryParseWithDebug(() => ParseDate(values[4]), "Naissance"),
+                                Payement = TryParseWithDebug(() => ParseBoolean(values[5]), "Payement"),
+                                Consigne = TryParseWithDebug(() => ParseBoolean(values[6]), "Consigne"),
+                                Carte_fede = TryParseWithDebug(() => ParseBoolean(values[7]), "Carte_fede"),
+                                Etiquete = TryParseWithDebug(() => ParseBoolean(values[8]), "Etiquete"),
+                                Courriel = values[9],
+                                Adresse = values[10],
+                                Telephone = values[11],
+                                Tel_urgence = values[12],
+                                Id_activite = activite?.Id ?? 0,
+                                Id_categorie = categorie?.Id ?? 0,
+                                Evaluation = values[15],
+                                Mode_payement = values[16],
+                                Carte_payement = values[17],
+                                Groupe = TryParseWithDebug(() =>
+                                {
+                                    if (string.IsNullOrWhiteSpace(values[18]))
+                                    {
+                                        Debug.WriteLine("Groupe value is null or empty.");
+                                        return "[]";
+                                    }
 
+                                    Debug.WriteLine($"Raw Groupe value: {values[18]}");
 
-                            if (row == 1) continue;
+                                    try
+                                    {
 
+                                        var parsedValues = System.Text.Json.JsonSerializer.Deserialize<string[]>(values[18]);
+                                        Debug.WriteLine($"Parsed Groupe value: {string.Join(",", parsedValues)}");
+                                        return System.Text.Json.JsonSerializer.Serialize(parsedValues);
+                                    }
+                                    catch (System.Text.Json.JsonException ex)
+                                    {
+                                        Debug.WriteLine($"Error deserializing Groupe: {ex.Message}");
+                                    }
 
-                            var values = line.Split(',');
+                                    try
+                                    {
+                                        var cleanedValue = values[18].Replace("\"", "").Replace("[", "").Replace("]", "").Trim();
+                                        Debug.WriteLine($"Fallback cleaned Groupe value: {cleanedValue}");
+                                        var fallbackArray = cleanedValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                        return System.Text.Json.JsonSerializer.Serialize(fallbackArray);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Debug.WriteLine($"Unexpected error parsing Groupe: {ex.Message}");
+                                    }
 
+                                    return "[]";
+                                }, "Groupe")
+                        };
 
-                            Pratiquant entite = new Pratiquant();
-                            entite.Nom = string.IsNullOrWhiteSpace(values[1]) ? "" : values[0];
+                            pratiquants.Add(pratiquant);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Error parsing row {row}: {ex.Message}");
+                        }
+                    }
+                }
 
-                            entite.Sexe = string.IsNullOrWhiteSpace(values[1]) ? "" : values[1];
-                            //entite.Nom = string.IsNullOrWhiteSpace(values[2]) ? "" : values[2];
-                            //entite.PersonneUrgence = string.IsNullOrWhiteSpace(values[3]) ? "" : values[3];
-                            //entite.Adresse = string.IsNullOrWhiteSpace(values[4]) ? "" : values[4];
-                            //entite.Ville = string.IsNullOrWhiteSpace(values[5]) ? "" : values[5];
-                            //entite.CodePostal = string.IsNullOrWhiteSpace(values[6]) ? "" : values[6];
-                            //entite.AdresseCourriel = string.IsNullOrWhiteSpace(values[7]) ? "" : values[7];
-                            //entite.Sexe = string.IsNullOrWhiteSpace(values[8]) ? "" : values[8];
+                using var transaction = await _context.Database.BeginTransactionAsync();
 
-                            //// Gestion de la date de naissance
-                            //if (DateTime.TryParse(values[9], out DateTime dateNaissance))
-                            //{
-                            //    entite.DateNaissance = dateNaissance;
-                            //}
-                            //else
-                            //{
-                            //    entite.DateNaissance = DateTime.MinValue; // Date par défaut si non valide
-                            //}
+                try
+                {
+                    foreach (var pratiquant in pratiquants)
+                    {
+                        _context.Pratiquants.Add(pratiquant);
+                        await _context.SaveChangesAsync();
 
-                            //entite.Poids = string.IsNullOrWhiteSpace(values[10]) ? "" : values[10];
-                            //entite.AutreNumero = string.IsNullOrWhiteSpace(values[11]) ? "" : values[11];
+                        // Create Presence entries
+                        var categorie = await _context.Categories
+                            .FirstOrDefaultAsync(c => c.Id == pratiquant.Id_categorie);
 
-                            //// Gestion des cases à cocher avec "X"
-                            //entite.Paiement = values[12] == "X";
-                            //entite.Federation = values[13] == "X";
+                        if (categorie != null)
+                        {
+                            DateOnly currentDate = categorie.Datedebut.Value;
+                            DateOnly endDate = categorie.Datefin.Value;
 
-                            Debug.WriteLine($"IdGroupe: {entite.Nom}");
-                            Debug.WriteLine($"Prenom: {entite.Sexe}");
-                            //Debug.WriteLine($"Nom: {entite.Nom}");
-                            //Debug.WriteLine($"PersonneUrgence: {entite.PersonneUrgence}");
-                            //Debug.WriteLine($"Adresse: {entite.Adresse}");
-                            //Debug.WriteLine($"Ville: {entite.Ville}");
-                            //Debug.WriteLine($"CodePostal: {entite.CodePostal}");
-                            //Debug.WriteLine($"AdresseCourriel: {entite.AdresseCourriel}");
-                            //Debug.WriteLine($"Sexe: {entite.Sexe}");
-                            //Debug.WriteLine($"DateNaissance: {entite.DateNaissance}");
-                            //Debug.WriteLine($"Poids: {entite.Poids}");
-                            //Debug.WriteLine($"AutreNumero: {entite.AutreNumero}");
-                            //Debug.WriteLine($"Paiement: {entite.Paiement}");
-                            //Debug.WriteLine($"Federation: {entite.Federation}");
+                            while (currentDate <= endDate)
+                            {
+                                var presence = new Presence
+                                {
+                                    Id_pratiquant = pratiquant.Id,
+                                    Jour = currentDate,
+                                    Present = false,
+                                    Abscence = true,
+                                    Id_activite = pratiquant.Id_activite,
+                                    Id_categorie = pratiquant.Id_categorie,
+                                    Id_session = pratiquant.Id_session,
+                                };
 
-                            // Sauvegarder l'entité
-                            _context.Add(entite);
-                            await _context.SaveChangesAsync();
+                                _context.Presences.Add(presence);
+                                currentDate = currentDate.AddDays(1);
+                            }
                         }
                     }
 
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    Debug.WriteLine($"Error during bulk insert: {ex.Message}");
+                    ModelState.AddModelError("File", "An error occurred during the upload process.");
+                    return RedirectToAction("Index");
                 }
 
+                return RedirectToAction(nameof(Index));
             }
-
-            return View("Index");
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error uploading file: {ex.Message}");
+                ModelState.AddModelError("File", "An error occurred during the upload process.");
+                return RedirectToAction("Index");
+            }
         }
+
+
+        // Méthode utilitaire pour encapsuler les blocs de débogage et capturer les exceptions
+        private T TryParseWithDebug<T>(Func<T> func, string fieldName)
+        {
+            try
+            {
+                return func();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors du traitement du champ '{fieldName}': {ex.Message}");
+                throw; // Relancer l'exception pour la gestion dans l'appelant
+            }
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> ExportToExcel()
         {

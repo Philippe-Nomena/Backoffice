@@ -137,8 +137,19 @@
                         </select>
                         <button type="submit" class="btn bg-blue" style="background-color:#007bff; color:white">Filtrer</button>
                     </form>
+                   
+
                 </div>
+
            </div>
+
+            <form asp-action="Upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="csvFile">Upload CSV File</label>
+                    <input type="file" name="csvFile" class="form-control" accept=".csv" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
 
             <!-- Create Modal -->
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
