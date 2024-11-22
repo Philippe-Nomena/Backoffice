@@ -118,7 +118,7 @@
             <!-- Navbar End -->
             <!-- Button to trigger modal -->
             <h3 class="text-white m-lg-4">Pratiquant</h3>
-           <div class="d-flex flex-row">
+         @*   <div class="d-flex flex-row">
                <div class="m-2">
                         <p class="d-flex align-items-center gap-3">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
@@ -149,7 +149,40 @@
                     <input type="file" name="csvFile" class="form-control" accept=".csv" required />
                 </div>
                 <button type="submit" class="btn btn-primary">Upload</button>
-            </form>
+            </form> *@
+            <div class="d-flex flex-row align-items-start gap-3">
+                <!-- Boutons Ajouter et Exporter -->
+                <div class="m-2">
+                    <p class="d-flex align-items-center gap-3">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
+                        <a class="btn btn-secondary" href="/Pratiquants/ExportToExcel">Exporter</a>
+                    </p>
+                </div>
+
+                <!-- Formulaire de Filtrage -->
+                <div class="mt-2">
+                    <form action="/Pratiquants/Index" method="get" class="d-flex align-items-center gap-2">
+                        <select id="Id_compagnie" name="Id_compagnie" class="form-select border border-light">
+                            @foreach (var v in liste)
+                            {
+                                <option value="@v.Id">@v.Compagnie</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn bg-blue" style="background-color:#007bff; color:white">Filtrer</button>
+                    </form>
+                </div>
+
+                <!-- Formulaire d'Upload -->
+                <div class="mt-2">
+                    <form asp-action="Upload" method="post" enctype="multipart/form-data" class="d-flex align-items-center gap-3">
+                        <div>
+                           
+                            <input type="file" name="csvFile" class="form-control" accept=".csv" required />
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Importer</button>
+                    </form>
+                </div>
+            </div>
 
             <!-- Create Modal -->
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">

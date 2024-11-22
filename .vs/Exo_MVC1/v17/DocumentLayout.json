@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\models\\pratiquant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\models\\pratiquant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,23 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
               "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "ViewState": "AQIAAI0AAAAAAAAAAAAqwJgAAAAAAAAA",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml*",
+              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml*",
+              "ViewState": "AQIAAJsAAAAAAAAAAAAAALkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T08:43:26.469Z"
+              "WhenOpened": "2024-11-20T08:43:26.469Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Pratiquant.cs",
               "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Models\\Pratiquant.cs",
               "RelativeDocumentMoniker": "Exo_MVC1\\Models\\Pratiquant.cs",
@@ -51,13 +52,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PratiquantsController.cs",
               "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "RelativeDocumentMoniker": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "RelativeToolTip": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "ViewState": "AQIAACQCAAAAAAAAAADgvzICAAA3AAAA",
+              "ViewState": "AQIAAOUAAAAAAAAAAAAawFUBAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T07:59:24.561Z",
               "EditorCaption": ""
