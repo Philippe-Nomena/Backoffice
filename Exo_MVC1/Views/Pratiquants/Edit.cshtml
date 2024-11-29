@@ -9,16 +9,16 @@
 
 <style>
     .bg-blue {
-        background-color: #007bff; /* Adjust this to your preferred shade of blue */
-        color: white; /* Text color */
-        border: none; /* Optional: remove border */
-        padding: 0.375rem 0.75rem; /* Padding for the button */
-        border-radius: 0.25rem; /* Optional: rounded corners */
+        background-color: #007bff;
+        color: white; 
+        border: none; 
+        padding: 0.375rem 0.75rem; 
+        border-radius: 0.25rem; 
     }
 
         .bg-blue:hover {
-            background-color: #0056b3; /* Darker shade for hover effect */
-            color: white; /* Maintain text color on hover */
+            background-color: #0056b3;
+            color: white; 
         }
 
 </style>
@@ -27,22 +27,22 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Id_session" class="control-label"></label>
-                <select asp-for="Id_session" class="form-control bg-white" asp-items="ViewBag.Id_session"></select>
+                <select asp-for="Id_session" class="form-control bg-white" required asp-items="ViewBag.Id_session"></select>
                 <span asp-validation-for="Id_session" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control bg-white" />
+                <input asp-for="Nom" class="form-control bg-white" required />
                 <span asp-validation-for="Nom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sexe" class="control-label"></label>
-                <input asp-for="Sexe" class="form-control bg-white" />
+                <input asp-for="Sexe" class="form-control bg-white" required />
                 <span asp-validation-for="Sexe" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Naissance" class="control-label"></label>
-                <input asp-for="Naissance" class="form-control bg-white" />
+                <input asp-for="Naissance" class="form-control bg-white" required />
                 <span asp-validation-for="Naissance" class="text-danger"></span>
             </div>
     <div class="form-group form-check">
@@ -73,53 +73,53 @@
     </div>
             <div class="form-group">
                 <label asp-for="Courriel" class="control-label"></label>
-                <input asp-for="Courriel" class="form-control bg-white" />
+                <input asp-for="Courriel" class="form-control bg-white" required />
                 <span asp-validation-for="Courriel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Adresse" class="control-label"></label>
-                <input asp-for="Adresse" class="form-control bg-white" />
+                <input asp-for="Adresse" class="form-control bg-white" required />
                 <span asp-validation-for="Adresse" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control bg-white" />
+                <input asp-for="Telephone" class="form-control bg-white" required />
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label  class="control-label">Numero telephone en cas d'urgence</label>
-                <input asp-for="Tel_urgence" class="form-control bg-white" />
+                <input asp-for="Tel_urgence" class="form-control bg-white" required />
                 <span asp-validation-for="Tel_urgence" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_activite" class="control-label"></label>
-        <select asp-for="Id_activite" class="form-control bg-white" asp-items="ViewBag.Id_activite" id="activiteDropdown"></select>
+        <select asp-for="Id_activite" class="form-control bg-white" required asp-items="ViewBag.Id_activite" id="activiteDropdown"></select>
                 <span asp-validation-for="Id_activite" class="text-danger"></span>
             </div>
     <div class="form-group">
         <label asp-for="Id_categorie" class="control-label"></label>
-        <select asp-for="Id_categorie" class="form-control bg-white" id="categorieDropdown">
+        <select asp-for="Id_categorie" class="form-control bg-white" required id="categorieDropdown">
             <option value="">Select Categorie</option>
         </select>
     </div>
             <div class="form-group">
                 <label asp-for="Evaluation" class="control-label"></label>
-                <input asp-for="Evaluation" class="form-control bg-white" />
+                <input asp-for="Evaluation" class="form-control bg-white" required />
                 <span asp-validation-for="Evaluation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Mode de paiement</label>
-                <input asp-for="Mode_payement" class="form-control bg-white" />
+                <input asp-for="Mode_payement" class="form-control bg-white" required />
                 <span asp-validation-for="Mode_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Carte de paiement</label>
-                <input asp-for="Carte_payement" class="form-control bg-white" />
+                <input asp-for="Carte_payement" class="form-control bg-white" required />
                 <span asp-validation-for="Carte_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Groupe" class="control-label"></label>
-                <input asp-for="Groupe" class="form-control bg-white mb-3" />
+                <input asp-for="Groupe" class="form-control bg-white mb-3" required/>
                 <span asp-validation-for="Groupe" class="text-danger"></span>
             </div>
             <div class="form-group">

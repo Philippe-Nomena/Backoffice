@@ -130,21 +130,6 @@ namespace Exo_MVC1.Controllers
             return RedirectToAction("Login", "Admins");
         }
 
-        // POST: Admins/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Nom,Username,Motdepasse")] Admin admin)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Hash the password
-        //        admin.Motdepasse = BCrypt.Net.BCrypt.HashPassword(admin.Motdepasse);
-        //        _context.Add(admin);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(admin);
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nom,Username,Motdepasse")] Admin admin)
@@ -158,15 +143,15 @@ namespace Exo_MVC1.Controllers
                     _context.Add(admin);
                     await _context.SaveChangesAsync();
 
-                    // Set success message in TempData
+        
                     TempData["SuccessMessage"] = "Admin created successfully!";
-                    //return RedirectToAction(nameof(Index));
+                  
                 }
                 catch (Exception ex)
                 {
-                    // Set error message in TempData
+                   
                     TempData["ErrorMessage"] = "An error occurred while creating the admin.";
-                    // Log the exception if necessary
+                  
                 }
             }
             return View(admin);

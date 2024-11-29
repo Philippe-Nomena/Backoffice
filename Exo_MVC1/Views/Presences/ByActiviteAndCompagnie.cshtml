@@ -128,11 +128,20 @@
                         }
                     </select>
                     <button type="submit" class="btn btn-success ml-2">Filtrer</button>
+
+                    <div class="d-flex justify-content-end ml-3">
+                        @if (ViewBag.Id_compagnie != null && ViewBag.Id_compagnie != 0)
+                        {
+                            <a class="btn btn-secondary" href="/Presences/ExportToExcelPresent?Id_compagnie=@ViewBag.Id_compagnie">Exporter</a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary" disabled>Exporter</button>
+                        }
+                    </div>
                 </div>
                 </form>
-        
 
-        
 
             <!-- (Remaining modal code omitted for brevity, keep it similar to your existing modals) -->
             <!-- Table displaying Presences -->

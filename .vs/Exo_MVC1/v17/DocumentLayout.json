@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\pratiquants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\controllers\\pratiquantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\models\\pratiquant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\models\\pratiquant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\controllers\\presencescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\controllers\\presencescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\presences\\byactiviteandcompagnie.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\presences\\byactiviteandcompagnie.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|c:\\users\\philippe\\documents\\github\\backoffice\\exo_mvc1\\views\\presences\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BAC885F9-A345-41E1-8E89-AC2E51E1B1C2}|Exo_MVC1\\Exo_MVC1.csproj|solutionrelative:exo_mvc1\\views\\presences\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,46 +26,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Pratiquants\\Index.cshtml*",
-              "RelativeToolTip": "Exo_MVC1\\Views\\Pratiquants\\Index.cshtml*",
-              "ViewState": "AQIAAJsAAAAAAAAAAAAAALkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T08:43:26.469Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Pratiquant.cs",
-              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Models\\Pratiquant.cs",
-              "RelativeDocumentMoniker": "Exo_MVC1\\Models\\Pratiquant.cs",
-              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Models\\Pratiquant.cs",
-              "RelativeToolTip": "Exo_MVC1\\Models\\Pratiquant.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAA7wFsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T08:23:33.964Z",
+              "Title": "ByActiviteAndCompagnie.cshtml",
+              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Presences\\ByActiviteAndCompagnie.cshtml",
+              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Presences\\ByActiviteAndCompagnie.cshtml",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Presences\\ByActiviteAndCompagnie.cshtml",
+              "RelativeToolTip": "Exo_MVC1\\Views\\Presences\\ByActiviteAndCompagnie.cshtml",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAYwI8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-27T14:04:34.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Presences\\Index.cshtml",
+              "RelativeDocumentMoniker": "Exo_MVC1\\Views\\Presences\\Index.cshtml",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Views\\Presences\\Index.cshtml",
+              "RelativeToolTip": "Exo_MVC1\\Views\\Presences\\Index.cshtml",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAnwHQAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-27T13:56:57.253Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "PresencesController.cs",
+              "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PresencesController.cs",
+              "RelativeDocumentMoniker": "Exo_MVC1\\Controllers\\PresencesController.cs",
+              "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PresencesController.cs",
+              "RelativeToolTip": "Exo_MVC1\\Controllers\\PresencesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAANUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T13:52:09.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "PratiquantsController.cs",
               "DocumentMoniker": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "RelativeDocumentMoniker": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "ToolTip": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Controllers\\PratiquantsController.cs",
               "RelativeToolTip": "Exo_MVC1\\Controllers\\PratiquantsController.cs",
-              "ViewState": "AQIAAOUAAAAAAAAAAAAawFUBAAACAAAA",
+              "ViewState": "AQIAAGACAAAAAAAAAAAYwOEBAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T07:59:24.561Z",
+              "WhenOpened": "2024-11-26T12:14:44.222Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

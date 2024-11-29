@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "q5NikQOYkYE=",
+  "dgSpecHash": "Gdw2Rdww3Q8=",
   "success": true,
   "projectFilePath": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\Exo_MVC1.csproj",
   "expectedPackageFiles": [
@@ -162,6 +162,10 @@
     "C:\\Users\\philippe\\.nuget\\packages\\nuget.protocol\\6.11.0\\nuget.protocol.6.11.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\nuget.versioning\\6.11.0\\nuget.versioning.6.11.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.2\\pomelo.entityframeworkcore.mysql.8.0.2.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\skiasharp\\2.88.9\\skiasharp.2.88.9.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.9\\skiasharp.nativeassets.macos.2.88.9.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.9\\skiasharp.nativeassets.win32.2.88.9.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\skiasharp.qrcode\\0.7.0\\skiasharp.qrcode.0.7.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
@@ -199,7 +203,9 @@
     "C:\\Users\\philippe\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\philippe\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\philippe\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\philippe\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\zxing.net\\0.16.9\\zxing.net.0.16.9.nupkg.sha512",
+    "C:\\Users\\philippe\\.nuget\\packages\\zxing.net.bindings.skiasharp\\0.16.14\\zxing.net.bindings.skiasharp.0.16.14.nupkg.sha512"
   ],
   "logs": []
 }

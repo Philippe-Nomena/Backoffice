@@ -81,7 +81,7 @@
             <label asp-for="Id_activite" class="control-label"></label>
             @if (ViewBag.Activites != null)
             {
-                <select asp-for="Id_activite" class="form-control bg-white" id="activiteDropdown">
+                <select asp-for="Id_activite" class="form-control bg-white" required id="activiteDropdown">
                     <option value="">Select Activite</option>
                     @foreach (var activite in ViewBag.Activites as IEnumerable<SelectListItem>)
                     {
@@ -97,29 +97,29 @@
 
         <div class="form-group">
             <label asp-for="Id_categorie" class="control-label"></label>
-            <select asp-for="Id_categorie" class="form-control bg-white" id="categorieDropdown">
+            <select asp-for="Id_categorie" class="form-control bg-white" required id="categorieDropdown">
                 <option value="">Select Categorie</option>
             </select>
         </div>
 
             <div class="form-group">
                 <label asp-for="Evaluation" class="control-label"></label>
-                <input asp-for="Evaluation" class="form-control bg-white" />
+                <input asp-for="Evaluation" class="form-control bg-white"  required/>
                 <span asp-validation-for="Evaluation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Mode de paiement</label>
-                <input asp-for="Mode_payement" class="form-control bg-white" />
+                <input asp-for="Mode_payement" class="form-control bg-white" required/>
                 <span asp-validation-for="Mode_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Numero de votre carte</label>
-                <input asp-for="Carte_payement" class="form-control bg-white" />
+                <input asp-for="Carte_payement" class="form-control bg-white" required/>
                 <span asp-validation-for="Carte_payement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Groupe" class="control-label"></label>
-                <input asp-for="Groupe" class="form-control mb-3 bg-white " />
+                <input asp-for="Groupe" class="form-control mb-3 bg-white" required/>
                 <span asp-validation-for="Groupe" class="text-danger"></span>
             </div>
             <div class="form-group">

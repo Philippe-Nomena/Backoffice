@@ -14,6 +14,8 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.TextTemplating;
 using Newtonsoft.Json;
 
+using SkiaSharp;
+
 namespace Exo_MVC1.Controllers
 {
     public class PratiquantsController : Controller
@@ -117,6 +119,60 @@ namespace Exo_MVC1.Controllers
         }
 
         // POST: Pratiquants/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
+        //{
+        //    if (!IsAdminLoggedIn())
+        //    {
+        //        return RedirectToAction("Login", "Admins");
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(pratiquant);
+        //        await _context.SaveChangesAsync();
+
+        //        var categorie = await _context.Categories
+        //            .FirstOrDefaultAsync(c => c.Id == pratiquant.Id_categorie);
+
+        //        if (categorie != null)
+        //        {
+
+        //            DateOnly currentDate = categorie.Datedebut.Value;
+        //            DateOnly endDate = categorie.Datefin.Value;
+
+        //            while (currentDate <= endDate)
+        //            {
+        //                var presence = new Presence
+        //                {
+        //                    Id_pratiquant = pratiquant.Id,
+        //                    Jour = currentDate, 
+        //                    Present = false,
+        //                    Abscence = true,
+        //                    Id_activite = pratiquant.Id_activite,
+        //                    Id_categorie = pratiquant.Id_categorie,
+        //                    Id_session = pratiquant.Id_session,
+        //                };
+
+        //                _context.Presences.Add(presence);
+        //                currentDate = currentDate.AddDays(1); 
+        //            }
+        //            await _context.SaveChangesAsync();
+        //        }
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    ViewData["Id_activite"] = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
+        //    ViewData["Id_categorie"] = new SelectList(_context.Categories, "Id", "Nom", pratiquant.Id_categorie);
+        //    ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
+        //    return View(pratiquant);
+        //}
+
+
+        // GET: Pratiquants/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
@@ -136,7 +192,6 @@ namespace Exo_MVC1.Controllers
 
                 if (categorie != null)
                 {
-                   
                     DateOnly currentDate = categorie.Datedebut.Value;
                     DateOnly endDate = categorie.Datefin.Value;
 
@@ -145,7 +200,7 @@ namespace Exo_MVC1.Controllers
                         var presence = new Presence
                         {
                             Id_pratiquant = pratiquant.Id,
-                            Jour = currentDate, 
+                            Jour = currentDate,
                             Present = false,
                             Abscence = true,
                             Id_activite = pratiquant.Id_activite,
@@ -154,9 +209,20 @@ namespace Exo_MVC1.Controllers
                         };
 
                         _context.Presences.Add(presence);
-                        currentDate = currentDate.AddDays(1); 
+                        currentDate = currentDate.AddDays(1);
                     }
                     await _context.SaveChangesAsync();
+                }
+                try
+                {
+                  
+                    string rootBarcodePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "barcodes");
+                    BarcodeHelper.GenerateBarcode(pratiquant.Id, rootBarcodePath);
+                }
+                catch (Exception ex)
+                {
+                   
+                    ModelState.AddModelError("", "Failed to generate barcode. Please try again.");
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -168,8 +234,6 @@ namespace Exo_MVC1.Controllers
             return View(pratiquant);
         }
 
-
-        // GET: Pratiquants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (!IsAdminLoggedIn())
@@ -339,7 +403,97 @@ namespace Exo_MVC1.Controllers
                 return null;
             }
         }
-  
+
+        //// Generer le code barre de format CODE_39
+        public class BarcodeHelper
+        {
+            public static string GenerateBarcode(int pratiquantId, string rootBarcode)
+            {
+                if (pratiquantId <= 0)
+                    throw new ArgumentException("Pratiquant ID must be a positive integer.", nameof(pratiquantId));
+
+                if (!Directory.Exists(rootBarcode))
+                {
+                    Directory.CreateDirectory(rootBarcode); // Crée le répertoire si inexistant
+                }
+
+                string fileName = $"{pratiquantId}_barcode.png";
+                string filePath = Path.Combine(rootBarcode, fileName);
+
+                try
+                {
+                    var writer = new ZXing.SkiaSharp.BarcodeWriter
+                    {
+                        Format = ZXing.BarcodeFormat.CODE_39,
+                        Options = new ZXing.Common.EncodingOptions
+                        {
+                            Height = 100,
+                            Width = 300,
+                            Margin = 2
+                        }
+                    };
+
+                    // Créer le fichier
+                    using (var image = writer.Write(pratiquantId.ToString()))
+                    using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                    {
+                        // Crée un FileStream pour écrire les données dans le fichier
+                        using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                        {
+                            data.SaveTo(stream);
+                        }
+                    }
+
+                    return filePath;
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    // Gérer les problèmes de permission
+                    throw new InvalidOperationException($"Access denied: {ex.Message}", ex);
+                }
+                catch (IOException ex)
+                {
+                    // Gérer les erreurs d'IO (fichier déjà ouvert, etc.)
+                    throw new InvalidOperationException($"File I/O error: {ex.Message}", ex);
+                }
+                catch (Exception ex)
+                {
+                    // Gérer les erreurs générales
+                    throw new InvalidOperationException($"Error generating barcode: {ex.Message}", ex);
+                }
+            }
+        }
+
+
+        [HttpGet("GetBarcode/{pratiquantId}")]
+    public IActionResult GetBarcode(int pratiquantId)
+    {
+        string rootBarcodePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "barcodes");
+
+        // Valider et créer le dossier si nécessaire
+        if (!Directory.Exists(rootBarcodePath))
+        {
+            Directory.CreateDirectory(rootBarcodePath);
+        }
+
+        string fileName = $"{pratiquantId}_barcode.png";
+        string filePath = Path.Combine(rootBarcodePath, fileName);
+
+        // Vérifier si le fichier existe
+        if (!System.IO.File.Exists(filePath))
+        {
+            return NotFound("Barcode not found.");
+        }
+
+        // Lire et retourner le fichier
+        byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+        return File(fileBytes, "image/png", fileName);
+    }
+
+
+
+
+        //// FUNCTION POUR IMPORTER LES DONNEES DES PRATIQUANTS EN FICHIER CSV
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile csvFile)
@@ -513,10 +667,13 @@ namespace Exo_MVC1.Controllers
             catch (Exception ex)
             {
                 Debug.WriteLine($"Erreur lors du traitement du champ '{fieldName}': {ex.Message}");
-                throw; // Relancer l'exception pour la gestion dans l'appelant
+                throw; 
             }
         }
 
+
+
+        //// FUNCTION POUR EXPORTER LES DONNEES PRATIQUANTS EN EXCEL
 
         [HttpGet]
         public async Task<IActionResult> ExportToExcel()
@@ -591,19 +748,23 @@ namespace Exo_MVC1.Controllers
                 return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Pratiquants.xlsx");
             }
         }
+
+
+
+        //// FUNCTION POUR AVOIR LES DONNEES A AFFICHER DANS LE CHART STATISTIQUE
         [HttpGet]
         public async Task<IActionResult> GetPratiquantsChartData()
         {
             // Group pratiquants by activite and count them
             var data = await _context.Pratiquants
-    .GroupBy(p => new { p.Id_activite, p.Ativite.Nom }) 
-    .Select(g => new
-    {
-        ActiviteId = g.Key.Id_activite,
-        ActiviteName = g.Key.Nom, 
-        Count = g.Count()
-    })
-    .ToListAsync();
+            .GroupBy(p => new { p.Id_activite, p.Ativite.Nom }) 
+            .Select(g => new
+            {
+                ActiviteId = g.Key.Id_activite,
+                ActiviteName = g.Key.Nom, 
+                Count = g.Count()
+            })
+            .ToListAsync();
 
             // Group pratiquants by category and count them
             var data1 = await _context.Pratiquants
@@ -622,12 +783,12 @@ namespace Exo_MVC1.Controllers
              .ThenInclude(a => a.Compagny) 
              .GroupBy(p => new { p.Ativite.Id_compagnie, p.Ativite.Compagny.Compagnie }) 
              .Select(c => new
-     {
-         CompagnyId = c.Key.Id_compagnie,
-         CompagnyName = c.Key.Compagnie,
-         Count = c.Count()
-     })
-     .ToListAsync();
+             {
+                 CompagnyId = c.Key.Id_compagnie,
+                 CompagnyName = c.Key.Compagnie,
+                 Count = c.Count()
+             })
+             .ToListAsync();
 
             // Combine the results into a single object
             var result = new

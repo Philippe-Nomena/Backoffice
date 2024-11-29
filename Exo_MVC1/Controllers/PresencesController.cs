@@ -202,18 +202,18 @@ namespace Exo_MVC1.Controllers
             }
 
             ViewBag.AdminName = HttpContext.Session.GetString("AdminName");
-
+            ViewBag.Id_compagnie = Id_compagnie;
             var compagnies = _context.Compagnyes.ToList();
             ViewBag.listCompanies= compagnies;
             var presences = await _context.Presences
-                .Include(p => p.Ativite)      
+                .Include(p => p.Ativite)
                 .ThenInclude(a => a.Compagny)
                 .Include(p => p.Pratiquant)
-                .Where(p => p.Ativite.Compagny.Id == Id_compagnie)
+                .Where(p => p.Ativite.Compagny.Id == Id_compagnie && p.Present == true)
                 .ToListAsync();
 
-         
-          
+
+
             return View(presences);
         }
 
@@ -267,14 +267,14 @@ namespace Exo_MVC1.Controllers
 
                 worksheet.Cells[1, 5].Value = "Status";
                 worksheet.Cells[1, 6].Value = "Nom de la pratiquant";
- 
+
 
                 // Add data rows
                 for (int i = 0; i < pratiquants.Count; i++)
                 {
                     var pratiquant = pratiquants[i];
                     worksheet.Cells[i + 2, 1].Value = pratiquant.Id;
-                    worksheet.Cells[i + 2, 2].Value = pratiquant.Session?.Nom ;
+                    worksheet.Cells[i + 2, 2].Value = pratiquant.Session?.Nom;
                     worksheet.Cells[i + 2, 3].Value = pratiquant.Categorie?.Categories;
                     worksheet.Cells[i + 2, 4].Value = pratiquant.Jour;
                     worksheet.Cells[i + 2, 5].Value = pratiquant.Present ? "Present" : (pratiquant.Abscence ? "Absent" : "");
@@ -293,5 +293,54 @@ namespace Exo_MVC1.Controllers
                 return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Pratiquants.xlsx");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportToExcelPresent(int Id_compagnie)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Filter presences by company and present status
+            var presences = await _context.Presences
+                .Include(p => p.Ativite)
+                .ThenInclude(a => a.Compagny)
+                .Include(p => p.Pratiquant)
+                .Where(p => p.Ativite.Compagny.Id == Id_compagnie && p.Present == true)
+                .ToListAsync();
+
+            using (var package = new ExcelPackage())
+            {
+                // Create a worksheet
+                var worksheet = package.Workbook.Worksheets.Add("Presences par companie");
+
+                // Add headers
+                worksheet.Cells[1, 1].Value = "Pratiquant";
+                worksheet.Cells[1, 2].Value = "Date";
+                worksheet.Cells[1, 3].Value = "Status";
+                worksheet.Cells[1, 4].Value = "Activite";
+                worksheet.Cells[1, 5].Value = "Compagnie";
+
+                // Add data rows
+                for (int i = 0; i < presences.Count; i++)
+                {
+                    var presence = presences[i];
+                    worksheet.Cells[i + 2, 1].Value = presence.Pratiquant?.Nom; 
+                    worksheet.Cells[i + 2, 2].Value = presence.Jour.ToString("yyyy-MM-dd");  
+                    worksheet.Cells[i + 2, 3].Value = "Present"; 
+                    worksheet.Cells[i + 2, 4].Value = presence.Ativite?.Nom;
+                    worksheet.Cells[i + 2, 5].Value =  presence.Ativite?.Compagny?.Compagnie; 
+                }
+
+                // Auto-fit columns
+                worksheet.Cells.AutoFitColumns();
+
+                // Generate Excel file as a byte array
+                var excelFile = package.GetAsByteArray();
+
+                // Return the file
+                return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Presences_Compagnie_{Id_compagnie}.xlsx");
+            }
+        }
+
+
     }
 }
