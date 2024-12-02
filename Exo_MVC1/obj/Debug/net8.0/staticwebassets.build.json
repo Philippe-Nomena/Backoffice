@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uT328Bv2L4ItP2MHdcRj5EB+tzKG6aq9e57E1NFB99w=",
+  "Hash": "BicH584kJcz66QnVgYYvkF0hz7dhLbsq87eibNZTDxQ=",
   "Source": "Exo_MVC1",
   "BasePath": "_content/Exo_MVC1",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Exo_MVC1.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\17_barcode.png",
+      "SourceId": "Exo_MVC1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
+      "BasePath": "_content/Exo_MVC1",
+      "RelativePath": "barcodes/17_barcode.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\barcodes\\17_barcode.png"
     },
     {
       "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\bootstrap.min.css",

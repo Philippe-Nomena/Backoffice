@@ -112,66 +112,13 @@ namespace Exo_MVC1.Controllers
             }
 
             ViewBag.Activites = new SelectList(_context.Activites, "Id", "Nom");
-            //ViewBag.Categories = new SelectList(_context.Categories, "Id", "Categories");
+       
             ViewBag.Categories= _context.Categories.ToList();
             ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom");
             return View();
         }
 
-        // POST: Pratiquants/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
-        //{
-        //    if (!IsAdminLoggedIn())
-        //    {
-        //        return RedirectToAction("Login", "Admins");
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(pratiquant);
-        //        await _context.SaveChangesAsync();
-
-        //        var categorie = await _context.Categories
-        //            .FirstOrDefaultAsync(c => c.Id == pratiquant.Id_categorie);
-
-        //        if (categorie != null)
-        //        {
-
-        //            DateOnly currentDate = categorie.Datedebut.Value;
-        //            DateOnly endDate = categorie.Datefin.Value;
-
-        //            while (currentDate <= endDate)
-        //            {
-        //                var presence = new Presence
-        //                {
-        //                    Id_pratiquant = pratiquant.Id,
-        //                    Jour = currentDate, 
-        //                    Present = false,
-        //                    Abscence = true,
-        //                    Id_activite = pratiquant.Id_activite,
-        //                    Id_categorie = pratiquant.Id_categorie,
-        //                    Id_session = pratiquant.Id_session,
-        //                };
-
-        //                _context.Presences.Add(presence);
-        //                currentDate = currentDate.AddDays(1); 
-        //            }
-        //            await _context.SaveChangesAsync();
-        //        }
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-
-        //    ViewData["Id_activite"] = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
-        //    ViewData["Id_categorie"] = new SelectList(_context.Categories, "Id", "Nom", pratiquant.Id_categorie);
-        //    ViewData["Id_session"] = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
-        //    return View(pratiquant);
-        //}
-
-
-        // GET: Pratiquants/Edit/5
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -254,14 +201,14 @@ namespace Exo_MVC1.Controllers
 
             ViewBag.Id_activite = new SelectList(_context.Activites, "Id", "Nom", pratiquant.Id_activite);
             ViewBag.Id_session = new SelectList(_context.Sessions, "Id", "Nom", pratiquant.Id_session);
-            //ViewBag.Id_categorie = new SelectList(Enumerable.Empty<SelectListItem>());
+           
             ViewBag.Categories= _context.Categories.ToList();
 
 
             return View(pratiquant);
         }
 
-        // POST: Pratiquants/Edit/5
+        // POST: Pratiquants/Edit/5 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Id_session,Nom,Sexe,Naissance,Payement,Consigne,Carte_fede,Etiquete,Courriel,Adresse,Telephone,Tel_urgence,Id_activite,Id_categorie,Evaluation,Mode_payement,Carte_payement,Groupe")] Pratiquant pratiquant)
@@ -598,6 +545,7 @@ namespace Exo_MVC1.Controllers
                     }
                 }
 
+
                 using var transaction = await _context.Database.BeginTransactionAsync();
 
                 try
@@ -606,6 +554,18 @@ namespace Exo_MVC1.Controllers
                     {
                         _context.Pratiquants.Add(pratiquant);
                         await _context.SaveChangesAsync();
+
+                        // Create barcode for the Pratiquant
+                        try
+                        {
+                            string rootBarcodePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "barcodes");
+                            BarcodeHelper.GenerateBarcode(pratiquant.Id, rootBarcodePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Error generating barcode for Pratiquant {pratiquant.Id}: {ex.Message}");
+                            // Optionally handle this error further, such as marking it for manual intervention
+                        }
 
                         // Create Presence entries
                         var categorie = await _context.Categories
