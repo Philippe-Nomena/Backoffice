@@ -121,29 +121,34 @@
             <!-- Navbar End -->
             <!-- Button to trigger modal -->
             <h3 class="text-white m-lg-4">Utilisateur par compagnie</h3>
+            <div class="d-flex flex-row align-items-start gap-3 ms-3">
+                <!-- Boutons Ajouter et Exporter -->
+                <div class="m-2">
+                    <p class="d-flex align-items-center gap-3">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
+                   
+                    </p>
+                </div>
 
-       
-                <div class="d-flex  m-lg-4">
+                <!-- Formulaire de Filtrage -->
+                <div class="mt-2">
+                    <form action="/Compagnie_Utilisateur/Index" method="get" class="d-flex align-items-center gap-2">
 
 
-                <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#createModal">Ajouter</button>
+                        <select id="Id_compagnie" class="btn border border-light me-2" name="Id_compagnie" >
+                            @foreach (var v in listecompagnie)
+                            {
+                                <option value="@v.Id">@v.Compagnie</option>
+                            }
+                        </select>
 
-                    <form action="/Compagnie_Utilisateur/Index" method="get">
-                        <div class="input-group">
-                          
-                            <select id="Id_compagnie" class="me-2" name="Id_compagnie">
-                                @foreach (var v in listecompagnie)
-                                {
-                                    <option value="@v.Id">@v.Compagnie</option>
-                                }
-                            </select>
-                      
-                            <button type="submit" class="btn btn-secondary">Filtrer</button>
-                        </div>
+                        <button type="submit" class="btn btn-secondary">Filtrer</button>
+
                     </form>
                 </div>
-         
 
+               
+            </div>
 
 
             <!-- Create Modal -->

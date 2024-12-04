@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BicH584kJcz66QnVgYYvkF0hz7dhLbsq87eibNZTDxQ=",
+  "Hash": "Gva/fk8YHdqUb8O1ZevrrgzNBuNKKMGdby7zucvDNSA=",
   "Source": "Exo_MVC1",
   "BasePath": "_content/Exo_MVC1",
   "Mode": "Default",
@@ -1195,12 +1195,12 @@
       "OriginalItemSpec": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Exo_MVC1.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\17_barcode.png",
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\23_barcode.png",
       "SourceId": "Exo_MVC1",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
       "BasePath": "_content/Exo_MVC1",
-      "RelativePath": "barcodes/17_barcode.png",
+      "RelativePath": "barcodes/23_barcode.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1211,7 +1211,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\barcodes\\17_barcode.png"
+      "OriginalItemSpec": "wwwroot\\barcodes\\23_barcode.png"
+    },
+    {
+      "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\24_barcode.png",
+      "SourceId": "Exo_MVC1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\",
+      "BasePath": "_content/Exo_MVC1",
+      "RelativePath": "barcodes/24_barcode.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\barcodes\\24_barcode.png"
     },
     {
       "Identity": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\bootstrap.min.css",

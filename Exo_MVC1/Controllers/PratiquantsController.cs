@@ -361,7 +361,7 @@ namespace Exo_MVC1.Controllers
 
                 if (!Directory.Exists(rootBarcode))
                 {
-                    Directory.CreateDirectory(rootBarcode); // Crée le répertoire si inexistant
+                    Directory.CreateDirectory(rootBarcode); 
                 }
 
                 string fileName = $"{pratiquantId}_barcode.png";
@@ -376,7 +376,8 @@ namespace Exo_MVC1.Controllers
                         {
                             Height = 100,
                             Width = 300,
-                            Margin = 2
+                            Margin = 2,
+                            PureBarcode=true
                         }
                     };
 
@@ -695,7 +696,7 @@ namespace Exo_MVC1.Controllers
                     worksheet.Cells[i + 2, 16].Value = pratiquant.Evaluation;
                     worksheet.Cells[i + 2, 17].Value = pratiquant.Mode_payement;
                     worksheet.Cells[i + 2, 18].Value = pratiquant.Carte_payement;
-                    worksheet.Cells[i + 2, 19].Value = pratiquant.Groupe;
+                    worksheet.Cells[i + 2, 19].Value = pratiquant.Groupe; 
                 }
 
                 // Auto-fit columns

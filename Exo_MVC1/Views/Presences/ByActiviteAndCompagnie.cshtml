@@ -120,7 +120,7 @@
          
                 <form action="/Presences/ByActiviteAndCompagnie" method="get">
                 <div class="d-flex flex-row ml-6">
-                    <select id="Id_compagnie" name="Id_compagnie" class="border border-light">
+                    <select id="Id_compagnie" name="Id_compagnie" class="btn border border-light me-2">
                         @foreach (var v in ViewBag.listCompanies as List<Compagny>)
                         {
                             <option value="@v.Id">@v.Compagnie</option>

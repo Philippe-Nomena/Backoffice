@@ -5,8 +5,12 @@
       "PackagePath": "staticwebassets\\Exo_MVC1.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\17_barcode.png",
-      "PackagePath": "staticwebassets\\barcodes\\17_barcode.png"
+      "Id": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\23_barcode.png",
+      "PackagePath": "staticwebassets\\barcodes\\23_barcode.png"
+    },
+    {
+      "Id": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\barcodes\\24_barcode.png",
+      "PackagePath": "staticwebassets\\barcodes\\24_barcode.png"
     },
     {
       "Id": "C:\\Users\\philippe\\Documents\\GitHub\\Backoffice\\Exo_MVC1\\wwwroot\\css\\bootstrap.min.css",

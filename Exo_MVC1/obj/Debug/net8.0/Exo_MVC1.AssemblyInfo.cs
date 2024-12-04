@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Exo_MVC1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11dd8332f274320a5cabde9abef9004404e9192e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03dce37a4c391286d72c94d1acf05453cfc814db")]
 [assembly: System.Reflection.AssemblyProductAttribute("Exo_MVC1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Exo_MVC1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
