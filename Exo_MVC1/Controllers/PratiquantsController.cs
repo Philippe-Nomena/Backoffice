@@ -673,6 +673,7 @@ namespace Exo_MVC1.Controllers
                 worksheet.Cells[1, 17].Value = "Mode de Payement";
                 worksheet.Cells[1, 18].Value = "Carte de Payement";
                 worksheet.Cells[1, 19].Value = "Groupe";
+                worksheet.Cells[1, 20].Value = "Barcode";
 
                 // Add data rows
                 for (int i = 0; i < pratiquants.Count; i++)
@@ -696,7 +697,22 @@ namespace Exo_MVC1.Controllers
                     worksheet.Cells[i + 2, 16].Value = pratiquant.Evaluation;
                     worksheet.Cells[i + 2, 17].Value = pratiquant.Mode_payement;
                     worksheet.Cells[i + 2, 18].Value = pratiquant.Carte_payement;
-                    worksheet.Cells[i + 2, 19].Value = pratiquant.Groupe; 
+                    worksheet.Cells[i + 2, 19].Value = pratiquant.Groupe;
+                    string barcodePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "barcodes", $"{pratiquant.Id}_barcode.png");
+
+                    if (System.IO.File.Exists(barcodePath))
+                    {
+                        var image = new FileInfo(barcodePath);
+                        var picture = worksheet.Drawings.AddPicture($"Barcode_{i}", image);
+
+                        // Positioning the image in the correct cell
+                        picture.SetPosition(i + 1, 0, 16, 0); // Row index (i+1) and Column index (16 -> Col 17)
+                        picture.SetSize(60, 60); // Resize image
+                    }
+                    else
+                    {
+                        worksheet.Cells[i + 2, 20].Value = "N/A"; // If barcode doesn't exist
+                    }
                 }
 
                 // Auto-fit columns
